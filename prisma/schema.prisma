@@ -1,0 +1,129 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  name String 
+  email String @unique
+  password String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  resumes Resume[]
+  interviews Interview[]
+}
+
+model Resume{
+  id Int @id @default(autoincrement())
+  title String
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  resumeUrl String
+  resumeText String
+  parsedData Json?
+  interviews Interview[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Interview{
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  type InterviewType
+  resume Resume @relation(fields: [resumeId], references: [id])
+  resumeId Int
+  difficulty Difficulty
+  status InterviewStatus @default(PENDING)
+  overallScore Float? // ? -> field is optional
+  startedAt DateTime?
+  endedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  questions Question[]
+  report Report?
+}
+
+enum InterviewType{
+  RESUME
+  HTML
+  CSS
+  JAVASCRIPT
+  TYPESCRIPT
+  NODEJS
+  EXPRESSJS
+  REACT
+  NEXTJS
+  MONGODB
+  SQL
+  POSTGRESQL
+  DSA
+  HR
+}
+
+enum Difficulty{
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum InterviewStatus{
+  PENDING
+  STARTED
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+model Question{
+  id Int @id @default(autoincrement())
+  interview Interview @relation(fields: [interviewId], references: [id])
+  interviewId Int
+  question String
+  questionNumber Int
+  topic InterviewType
+  difficulty Difficulty
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  answer Answer?
+  followUpQuestion String?
+}
+
+model Answer{
+  id Int @id @default(autoincrement())
+  question Question @relation(fields: [questionId], references: [id])
+  questionId Int @unique
+  answer String
+  score Int
+  timeTaken Int?
+  confidence Float?
+  feedback String
+  idealAnswer String
+  missingPoints Json?
+  answeredAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Report{
+  id Int @id @default(autoincrement())
+  interview Interview @relation(fields: [interviewId], references: [id])
+  interviewId Int @unique
+  overallScore Float?
+  technicalScore Float?
+  explanation String?
+  communicationScore Float?
+  confidenceScore Float?
+  problemSolvingScore Float?
+  strengths Json?
+  weaknesses Json?
+  improvementPlan Json?
+  overallFeedback String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
