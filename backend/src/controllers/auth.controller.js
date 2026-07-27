@@ -1,4 +1,4 @@
-import { registerUser } from "../services/auth.service.js";
+import { registerUser, loginUser } from "../services/auth.service.js";
 
 export async function register(req, res) {
     try {
@@ -14,4 +14,24 @@ export async function register(req, res) {
     }
 }
 
-export default register;
+export async function login(req, res) {
+    try {
+        const user = await loginUser(req.body);
+
+        res.status(200).json({
+            success: true,
+            message: "Login successful",
+            data: user
+        });
+    } catch (err) {
+        return res.status(err.statusCode || 500).json({ error: err.message })
+    }
+}
+
+export const getProfile = (req, res) => {
+    return res.status(200).json({
+        success: true,
+        message: "Profile fetched",
+        user: req.user,
+    })
+}
