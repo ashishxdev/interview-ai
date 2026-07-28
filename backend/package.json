@@ -20,6 +20,9 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
+    "multer": "^2.2.0",
+    "pdf-parse": "^2.4.5",
+    "pdf-parser": "^1.0.5",
     "pg": "^8.22.0",
     "pg-connection-string": "^2.14.0"
   },
