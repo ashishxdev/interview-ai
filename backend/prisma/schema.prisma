@@ -84,7 +84,7 @@ model Question{
 model Answer{
   id Int @id @default(autoincrement())
   question Question @relation(fields: [questionId], references: [id])
-  questionId Int @unique
+  questionId Int
   answer String
   score Int
   timeTaken Int?

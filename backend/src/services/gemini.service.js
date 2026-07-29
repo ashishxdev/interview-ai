@@ -86,3 +86,47 @@ export const parseResumeWithGemini = async (resumeText) => {
 
     return response.text;
 };
+
+export const evaluateAnswerWithGemini = async (question, answer) => {
+
+    const prompt = `
+    You are an expert technical interviewer.
+
+    Evaluate the candidate's answer.
+
+    Question:
+    ${question}
+
+    Candidate Answer:
+    ${answer}
+
+    Return ONLY valid JSON.
+
+    Do not wrap inside markdown.
+    Do not write \`\`\`json.
+    Do not write explanations.
+
+    JSON Structure:
+
+    {
+    "score": 8,
+    "feedback": "Good explanation...",
+    "idealAnswer": "...",
+    "missingPoints": [
+        "...",
+        "..."
+    ]
+    `;
+
+    const response = await ai.models.generateContent({
+        model: "gemini-3.6-flash",
+        contents: prompt,
+    });
+
+    const cleanedText = response.text
+        .replace(/```json/g, "")
+        .replace(/```/g, "")
+        .trim();
+
+    return cleanedText;
+};
