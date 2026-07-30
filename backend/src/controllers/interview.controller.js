@@ -1,5 +1,6 @@
 import prisma from "../config/prisma.js";
-import { evaluateAnswerWithGemini } from "../services/gemini.service.js";
+import { evaluateAnswerWithGemini, generateInterviewQuestions } from "../services/gemini.service.js";
+import { InterviewStatus } from "../generated/prisma/index.js";
 
 export const getInterviewQuestions = async (req, res) => {
     try {
@@ -57,7 +58,78 @@ export const getInterviewQuestions = async (req, res) => {
 }
 
 export const createInterview = async (req, res) => {
+    try {
+        const { resumeId, difficulty, title } = req.body;
+        const userId = req.user.id;
 
+        const resumeIdNumber = Number(resumeId);
+
+        if (isNaN(resumeIdNumber)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid resume ID.",
+            });
+        }
+        const resume = await prisma.resume.findUnique({
+            where: {
+                id: resumeIdNumber,
+            },
+        });
+        if (!resume) {
+            return res.status(404).json({
+                success: false,
+                message: "Resume not found.",
+            });
+        }
+        if (resume.userId !== userId) {
+            return res.status(403).json({
+                success: false,
+                message: "Unauthorized access.",
+            });
+        }
+        if (!resume.parsedData) {
+            return res.status(400).json({
+                success: false,
+                message: "Resume has not been parsed yet.",
+            });
+        }
+        const questions = await generateInterviewQuestions(
+            resume.parsedData,
+            difficulty
+        );
+        if (!Array.isArray(questions) || questions.length === 0) {
+            throw new Error("Failed to generate interview questions.");
+        }
+        const interview = await prisma.interview.create({
+            data: {
+                userId,
+                resumeId: resume.id,
+                title,
+                difficulty,
+                resumeSnapshot: resume.parsedData,
+            },
+        });
+
+        await prisma.question.createMany({
+            data: questions.map((question, index) => ({
+                interviewId: interview.id,
+                questionNumber: index + 1,
+                question: question.question,
+                topic: question.topic,
+            })),
+        });
+        return res.status(201).json({
+            success: true,
+            interviewId: interview.id,
+        });
+    } catch (err) {
+        console.error(err);
+
+        return res.status(500).json({
+            success: false,
+            message: err.message,
+        });
+    }
 };
 
 export const submitAnswer = async (req, res) => {
@@ -65,7 +137,7 @@ export const submitAnswer = async (req, res) => {
         const { interviewId } = req.params;
         const { questionId, answer } = req.body;
 
-        if (!questionId || !answer?.trim()) {
+        if (!questionId || typeof answer !== "string" || !answer.trim()) {
             return res.status(400).json({
                 success: false,
                 message: "Question ID and answer are required.",
@@ -101,10 +173,17 @@ export const submitAnswer = async (req, res) => {
                 message: "Unauthorized access.",
             });
         }
+        const questionIdNumber = Number(questionId);
 
+        if (isNaN(questionIdNumber)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid question ID.",
+            });
+        }
         const question = await prisma.question.findFirst({
             where: {
-                id: Number(questionId),
+                id: questionIdNumber,
                 interviewId: interviewIdNumber,
             },
         });
@@ -137,6 +216,13 @@ export const submitAnswer = async (req, res) => {
 
         try {
             evaluation = JSON.parse(evaluationText);
+            if (
+                typeof evaluation.score !== "number" ||
+                !evaluation.feedback ||
+                !evaluation.idealAnswer
+            ) {
+                throw new Error("Invalid evaluation response.");
+            }
         } catch {
             return res.status(500).json({
                 success: false,
@@ -178,19 +264,11 @@ export const submitAnswer = async (req, res) => {
                     },
                 },
             });
-            const totalScore = answers.reduce((sum, answer) => {
-                return sum + answer.score;
-            }, 0);
-            const averageScore =
-                totalQuestions > 0
-                    ? Number((totalScore / totalQuestions).toFixed(2))
-                    : 0;
             await prisma.interview.update({
                 where: {
                     id: interviewIdNumber,
                 },
                 data: {
-                    overallScore: averageScore,
                     status: InterviewStatus.COMPLETED,
                     endedAt: new Date(),
                 },

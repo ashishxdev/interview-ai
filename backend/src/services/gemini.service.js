@@ -84,7 +84,12 @@ export const parseResumeWithGemini = async (resumeText) => {
         contents: prompt,
     });
 
-    return response.text;
+    const cleanedText = response.text
+        .replace(/```json/g, "")
+        .replace(/```/g, "")
+        .trim();
+
+    return cleanedText;
 };
 
 export const evaluateAnswerWithGemini = async (question, answer) => {
@@ -109,13 +114,14 @@ export const evaluateAnswerWithGemini = async (question, answer) => {
     JSON Structure:
 
     {
-    "score": 8,
-    "feedback": "Good explanation...",
-    "idealAnswer": "...",
-    "missingPoints": [
-        "...",
-        "..."
-    ]
+        "score": 8,
+        "feedback": "Good explanation...",
+        "idealAnswer": "...",
+        "missingPoints": [
+            "...",
+            "..."
+        ]
+    }
     `;
 
     const response = await ai.models.generateContent({
@@ -129,4 +135,93 @@ export const evaluateAnswerWithGemini = async (question, answer) => {
         .trim();
 
     return cleanedText;
+};
+
+export const generateInterviewQuestions = async (
+    parsedResume,
+    difficulty
+) => {
+    const prompt = `
+You are an expert technical interviewer.
+
+Based on the candidate's resume, 
+Generate EXACTLY 10 questions.
+Do not generate fewer than 10.
+Do not generate more than 10.
+Avoid asking duplicate or highly similar questions.
+Cover different technologies, concepts, and projects from the resume.
+
+Base every technical and project question on technologies, projects, or experience mentioned in the resume. Do not ask about technologies that are not present unless they are fundamental computer science concepts.
+
+Difficulty: ${difficulty || "MEDIUM"}
+
+Question distribution:
+
+- 6 Technical questions
+- 2 Project-based questions
+- 2 behavioral questions related to teamwork, communication, problem-solving, or past experiences.
+
+Resume:
+
+${JSON.stringify(parsedResume)}
+
+Return ONLY valid JSON.
+
+Do not wrap inside markdown.
+Do not write \`\`\`json.
+Do not write explanations.
+
+JSON Structure:
+
+[
+    {
+        "question":"Explain React Virtual DOM.",
+        "topic":"React",
+        "type":"TECHNICAL"
+    },
+    {
+        "question":"Tell me about your expense tracker project.",
+        "topic":"Projects",
+        "type":"PROJECT"
+    },
+    {
+        "question":"Tell me about yourself.",
+        "topic":"HR",
+        "type":"HR"
+    }
+]
+`;
+
+    const response = await ai.models.generateContent({
+        model: "gemini-3.6-flash",
+        contents: prompt,
+    });
+
+    const cleanedText = response.text
+        .replace(/```json/g, "")
+        .replace(/```/g, "")
+        .trim();
+
+    let questions;
+
+    try {
+        questions = JSON.parse(cleanedText);
+    } catch {
+        throw new Error("Failed to parse interview questions from Gemini.");
+    }
+
+
+    if (
+        !Array.isArray(questions) ||
+        !questions.every(
+            (q) =>
+                typeof q.question === "string" &&
+                typeof q.topic === "string" &&
+                typeof q.type === "string"
+        )
+    ) {
+        throw new Error("Invalid interview questions generated.");
+    }
+
+    return questions;
 };

@@ -1354,15 +1354,15 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    resumes: number
     interviews: number
     reports: number
+    resumes: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    resumes?: boolean | UserCountOutputTypeCountResumesArgs
     interviews?: boolean | UserCountOutputTypeCountInterviewsArgs
     reports?: boolean | UserCountOutputTypeCountReportsArgs
+    resumes?: boolean | UserCountOutputTypeCountResumesArgs
   }
 
   // Custom InputTypes
@@ -1379,13 +1379,6 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountResumesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ResumeWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
   export type UserCountOutputTypeCountInterviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: InterviewWhereInput
   }
@@ -1395,6 +1388,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountReportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReportWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountResumesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ResumeWhereInput
   }
 
 
@@ -1670,9 +1670,9 @@ export namespace Prisma {
     password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    resumes?: boolean | User$resumesArgs<ExtArgs>
     interviews?: boolean | User$interviewsArgs<ExtArgs>
     reports?: boolean | User$reportsArgs<ExtArgs>
+    resumes?: boolean | User$resumesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1705,9 +1705,9 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    resumes?: boolean | User$resumesArgs<ExtArgs>
     interviews?: boolean | User$interviewsArgs<ExtArgs>
     reports?: boolean | User$reportsArgs<ExtArgs>
+    resumes?: boolean | User$resumesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1716,9 +1716,9 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      resumes: Prisma.$ResumePayload<ExtArgs>[]
       interviews: Prisma.$InterviewPayload<ExtArgs>[]
       reports: Prisma.$ReportPayload<ExtArgs>[]
+      resumes: Prisma.$ResumePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2121,9 +2121,9 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    resumes<T extends User$resumesArgs<ExtArgs> = {}>(args?: Subset<T, User$resumesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ResumePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     interviews<T extends User$interviewsArgs<ExtArgs> = {}>(args?: Subset<T, User$interviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InterviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reports<T extends User$reportsArgs<ExtArgs> = {}>(args?: Subset<T, User$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    resumes<T extends User$resumesArgs<ExtArgs> = {}>(args?: Subset<T, User$resumesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ResumePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2552,30 +2552,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.resumes
-   */
-  export type User$resumesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Resume
-     */
-    select?: ResumeSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Resume
-     */
-    omit?: ResumeOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ResumeInclude<ExtArgs> | null
-    where?: ResumeWhereInput
-    orderBy?: ResumeOrderByWithRelationInput | ResumeOrderByWithRelationInput[]
-    cursor?: ResumeWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ResumeScalarFieldEnum | ResumeScalarFieldEnum[]
-  }
-
-  /**
    * User.interviews
    */
   export type User$interviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2621,6 +2597,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReportScalarFieldEnum | ReportScalarFieldEnum[]
+  }
+
+  /**
+   * User.resumes
+   */
+  export type User$resumesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Resume
+     */
+    select?: ResumeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Resume
+     */
+    omit?: ResumeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResumeInclude<ExtArgs> | null
+    where?: ResumeWhereInput
+    orderBy?: ResumeOrderByWithRelationInput | ResumeOrderByWithRelationInput[]
+    cursor?: ResumeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ResumeScalarFieldEnum | ResumeScalarFieldEnum[]
   }
 
   /**
@@ -2872,8 +2872,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     fileName?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     interviews?: boolean | Resume$interviewsArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | ResumeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["resume"]>
 
@@ -2917,8 +2917,8 @@ export namespace Prisma {
 
   export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "userId" | "resumeUrl" | "resumeText" | "parsedData" | "createdAt" | "updatedAt" | "fileName", ExtArgs["result"]["resume"]>
   export type ResumeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     interviews?: boolean | Resume$interviewsArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | ResumeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ResumeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2931,8 +2931,8 @@ export namespace Prisma {
   export type $ResumePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Resume"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       interviews: Prisma.$InterviewPayload<ExtArgs>[]
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3338,8 +3338,8 @@ export namespace Prisma {
    */
   export interface Prisma__ResumeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     interviews<T extends Resume$interviewsArgs<ExtArgs> = {}>(args?: Subset<T, Resume$interviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InterviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4071,8 +4071,8 @@ export namespace Prisma {
     endedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     resume?: boolean | ResumeDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     questions?: boolean | Interview$questionsArgs<ExtArgs>
     report?: boolean | Interview$reportArgs<ExtArgs>
     _count?: boolean | InterviewCountOutputTypeDefaultArgs<ExtArgs>
@@ -4090,8 +4090,8 @@ export namespace Prisma {
     endedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     resume?: boolean | ResumeDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["interview"]>
 
   export type InterviewSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4106,8 +4106,8 @@ export namespace Prisma {
     endedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     resume?: boolean | ResumeDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["interview"]>
 
   export type InterviewSelectScalar = {
@@ -4126,26 +4126,26 @@ export namespace Prisma {
 
   export type InterviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "resumeSnapshot" | "resumeId" | "difficulty" | "status" | "startedAt" | "endedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["interview"]>
   export type InterviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     resume?: boolean | ResumeDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     questions?: boolean | Interview$questionsArgs<ExtArgs>
     report?: boolean | Interview$reportArgs<ExtArgs>
     _count?: boolean | InterviewCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type InterviewIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     resume?: boolean | ResumeDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type InterviewIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     resume?: boolean | ResumeDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $InterviewPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Interview"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       resume: Prisma.$ResumePayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
       questions: Prisma.$QuestionPayload<ExtArgs>[]
       report: Prisma.$ReportPayload<ExtArgs> | null
     }
@@ -4555,8 +4555,8 @@ export namespace Prisma {
    */
   export interface Prisma__InterviewClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     resume<T extends ResumeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ResumeDefaultArgs<ExtArgs>>): Prisma__ResumeClient<$Result.GetResult<Prisma.$ResumePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     questions<T extends Interview$questionsArgs<ExtArgs> = {}>(args?: Subset<T, Interview$questionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     report<T extends Interview$reportArgs<ExtArgs> = {}>(args?: Subset<T, Interview$reportArgs<ExtArgs>>): Prisma__ReportClient<$Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
@@ -5283,8 +5283,8 @@ export namespace Prisma {
     questionNumber?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    interview?: boolean | InterviewDefaultArgs<ExtArgs>
     answer?: boolean | Question$answerArgs<ExtArgs>
+    interview?: boolean | InterviewDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["question"]>
 
   export type QuestionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5321,8 +5321,8 @@ export namespace Prisma {
 
   export type QuestionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "interviewId" | "topic" | "question" | "questionNumber" | "createdAt" | "updatedAt", ExtArgs["result"]["question"]>
   export type QuestionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    interview?: boolean | InterviewDefaultArgs<ExtArgs>
     answer?: boolean | Question$answerArgs<ExtArgs>
+    interview?: boolean | InterviewDefaultArgs<ExtArgs>
   }
   export type QuestionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     interview?: boolean | InterviewDefaultArgs<ExtArgs>
@@ -5334,8 +5334,8 @@ export namespace Prisma {
   export type $QuestionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Question"
     objects: {
-      interview: Prisma.$InterviewPayload<ExtArgs>
       answer: Prisma.$AnswerPayload<ExtArgs> | null
+      interview: Prisma.$InterviewPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -5739,8 +5739,8 @@ export namespace Prisma {
    */
   export interface Prisma__QuestionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    interview<T extends InterviewDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InterviewDefaultArgs<ExtArgs>>): Prisma__InterviewClient<$Result.GetResult<Prisma.$InterviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     answer<T extends Question$answerArgs<ExtArgs> = {}>(args?: Subset<T, Question$answerArgs<ExtArgs>>): Prisma__AnswerClient<$Result.GetResult<Prisma.$AnswerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    interview<T extends InterviewDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InterviewDefaultArgs<ExtArgs>>): Prisma__InterviewClient<$Result.GetResult<Prisma.$InterviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7734,8 +7734,8 @@ export namespace Prisma {
     overallFeedback?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     interview?: boolean | InterviewDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["report"]>
 
   export type ReportSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7755,8 +7755,8 @@ export namespace Prisma {
     overallFeedback?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     interview?: boolean | InterviewDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["report"]>
 
   export type ReportSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7776,8 +7776,8 @@ export namespace Prisma {
     overallFeedback?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     interview?: boolean | InterviewDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["report"]>
 
   export type ReportSelectScalar = {
@@ -7801,23 +7801,23 @@ export namespace Prisma {
 
   export type ReportOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "duration" | "interviewId" | "overallScore" | "technicalScore" | "explanation" | "communicationScore" | "confidenceScore" | "problemSolvingScore" | "strengths" | "weaknesses" | "improvementPlan" | "overallFeedback" | "createdAt" | "updatedAt", ExtArgs["result"]["report"]>
   export type ReportInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     interview?: boolean | InterviewDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type ReportIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     interview?: boolean | InterviewDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type ReportIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     interview?: boolean | InterviewDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $ReportPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Report"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       interview: Prisma.$InterviewPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -8230,8 +8230,8 @@ export namespace Prisma {
    */
   export interface Prisma__ReportClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     interview<T extends InterviewDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InterviewDefaultArgs<ExtArgs>>): Prisma__InterviewClient<$Result.GetResult<Prisma.$InterviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8965,9 +8965,9 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    resumes?: ResumeListRelationFilter
     interviews?: InterviewListRelationFilter
     reports?: ReportListRelationFilter
+    resumes?: ResumeListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -8977,9 +8977,9 @@ export namespace Prisma {
     password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    resumes?: ResumeOrderByRelationAggregateInput
     interviews?: InterviewOrderByRelationAggregateInput
     reports?: ReportOrderByRelationAggregateInput
+    resumes?: ResumeOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -8992,9 +8992,9 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    resumes?: ResumeListRelationFilter
     interviews?: InterviewListRelationFilter
     reports?: ReportListRelationFilter
+    resumes?: ResumeListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -9036,8 +9036,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Resume"> | Date | string
     updatedAt?: DateTimeFilter<"Resume"> | Date | string
     fileName?: StringNullableFilter<"Resume"> | string | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     interviews?: InterviewListRelationFilter
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type ResumeOrderByWithRelationInput = {
@@ -9050,8 +9050,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     fileName?: SortOrderInput | SortOrder
-    user?: UserOrderByWithRelationInput
     interviews?: InterviewOrderByRelationAggregateInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type ResumeWhereUniqueInput = Prisma.AtLeast<{
@@ -9067,8 +9067,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Resume"> | Date | string
     updatedAt?: DateTimeFilter<"Resume"> | Date | string
     fileName?: StringNullableFilter<"Resume"> | string | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     interviews?: InterviewListRelationFilter
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type ResumeOrderByWithAggregationInput = {
@@ -9118,8 +9118,8 @@ export namespace Prisma {
     endedAt?: DateTimeNullableFilter<"Interview"> | Date | string | null
     createdAt?: DateTimeFilter<"Interview"> | Date | string
     updatedAt?: DateTimeFilter<"Interview"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     resume?: XOR<ResumeScalarRelationFilter, ResumeWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     questions?: QuestionListRelationFilter
     report?: XOR<ReportNullableScalarRelationFilter, ReportWhereInput> | null
   }
@@ -9136,8 +9136,8 @@ export namespace Prisma {
     endedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
     resume?: ResumeOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
     questions?: QuestionOrderByRelationAggregateInput
     report?: ReportOrderByWithRelationInput
   }
@@ -9157,8 +9157,8 @@ export namespace Prisma {
     endedAt?: DateTimeNullableFilter<"Interview"> | Date | string | null
     createdAt?: DateTimeFilter<"Interview"> | Date | string
     updatedAt?: DateTimeFilter<"Interview"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     resume?: XOR<ResumeScalarRelationFilter, ResumeWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     questions?: QuestionListRelationFilter
     report?: XOR<ReportNullableScalarRelationFilter, ReportWhereInput> | null
   }, "id">
@@ -9210,8 +9210,8 @@ export namespace Prisma {
     questionNumber?: IntFilter<"Question"> | number
     createdAt?: DateTimeFilter<"Question"> | Date | string
     updatedAt?: DateTimeFilter<"Question"> | Date | string
-    interview?: XOR<InterviewScalarRelationFilter, InterviewWhereInput>
     answer?: XOR<AnswerNullableScalarRelationFilter, AnswerWhereInput> | null
+    interview?: XOR<InterviewScalarRelationFilter, InterviewWhereInput>
   }
 
   export type QuestionOrderByWithRelationInput = {
@@ -9222,8 +9222,8 @@ export namespace Prisma {
     questionNumber?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    interview?: InterviewOrderByWithRelationInput
     answer?: AnswerOrderByWithRelationInput
+    interview?: InterviewOrderByWithRelationInput
   }
 
   export type QuestionWhereUniqueInput = Prisma.AtLeast<{
@@ -9237,8 +9237,8 @@ export namespace Prisma {
     questionNumber?: IntFilter<"Question"> | number
     createdAt?: DateTimeFilter<"Question"> | Date | string
     updatedAt?: DateTimeFilter<"Question"> | Date | string
-    interview?: XOR<InterviewScalarRelationFilter, InterviewWhereInput>
     answer?: XOR<AnswerNullableScalarRelationFilter, AnswerWhereInput> | null
+    interview?: XOR<InterviewScalarRelationFilter, InterviewWhereInput>
   }, "id">
 
   export type QuestionOrderByWithAggregationInput = {
@@ -9386,8 +9386,8 @@ export namespace Prisma {
     overallFeedback?: StringNullableFilter<"Report"> | string | null
     createdAt?: DateTimeFilter<"Report"> | Date | string
     updatedAt?: DateTimeFilter<"Report"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     interview?: XOR<InterviewScalarRelationFilter, InterviewWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type ReportOrderByWithRelationInput = {
@@ -9407,8 +9407,8 @@ export namespace Prisma {
     overallFeedback?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
     interview?: InterviewOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type ReportWhereUniqueInput = Prisma.AtLeast<{
@@ -9431,8 +9431,8 @@ export namespace Prisma {
     overallFeedback?: StringNullableFilter<"Report"> | string | null
     createdAt?: DateTimeFilter<"Report"> | Date | string
     updatedAt?: DateTimeFilter<"Report"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     interview?: XOR<InterviewScalarRelationFilter, InterviewWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "interviewId">
 
   export type ReportOrderByWithAggregationInput = {
@@ -9487,9 +9487,9 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    resumes?: ResumeCreateNestedManyWithoutUserInput
     interviews?: InterviewCreateNestedManyWithoutUserInput
     reports?: ReportCreateNestedManyWithoutUserInput
+    resumes?: ResumeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -9499,9 +9499,9 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    resumes?: ResumeUncheckedCreateNestedManyWithoutUserInput
     interviews?: InterviewUncheckedCreateNestedManyWithoutUserInput
     reports?: ReportUncheckedCreateNestedManyWithoutUserInput
+    resumes?: ResumeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -9510,9 +9510,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    resumes?: ResumeUpdateManyWithoutUserNestedInput
     interviews?: InterviewUpdateManyWithoutUserNestedInput
     reports?: ReportUpdateManyWithoutUserNestedInput
+    resumes?: ResumeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -9522,9 +9522,9 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    resumes?: ResumeUncheckedUpdateManyWithoutUserNestedInput
     interviews?: InterviewUncheckedUpdateManyWithoutUserNestedInput
     reports?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    resumes?: ResumeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -9561,8 +9561,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     fileName?: string | null
-    user: UserCreateNestedOneWithoutResumesInput
     interviews?: InterviewCreateNestedManyWithoutResumeInput
+    user: UserCreateNestedOneWithoutResumesInput
   }
 
   export type ResumeUncheckedCreateInput = {
@@ -9586,8 +9586,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fileName?: NullableStringFieldUpdateOperationsInput | string | null
-    user?: UserUpdateOneRequiredWithoutResumesNestedInput
     interviews?: InterviewUpdateManyWithoutResumeNestedInput
+    user?: UserUpdateOneRequiredWithoutResumesNestedInput
   }
 
   export type ResumeUncheckedUpdateInput = {
@@ -9646,8 +9646,8 @@ export namespace Prisma {
     endedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutInterviewsInput
     resume: ResumeCreateNestedOneWithoutInterviewsInput
+    user: UserCreateNestedOneWithoutInterviewsInput
     questions?: QuestionCreateNestedManyWithoutInterviewInput
     report?: ReportCreateNestedOneWithoutInterviewInput
   }
@@ -9677,8 +9677,8 @@ export namespace Prisma {
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutInterviewsNestedInput
     resume?: ResumeUpdateOneRequiredWithoutInterviewsNestedInput
+    user?: UserUpdateOneRequiredWithoutInterviewsNestedInput
     questions?: QuestionUpdateManyWithoutInterviewNestedInput
     report?: ReportUpdateOneWithoutInterviewNestedInput
   }
@@ -9744,8 +9744,8 @@ export namespace Prisma {
     questionNumber: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    interview: InterviewCreateNestedOneWithoutQuestionsInput
     answer?: AnswerCreateNestedOneWithoutQuestionInput
+    interview: InterviewCreateNestedOneWithoutQuestionsInput
   }
 
   export type QuestionUncheckedCreateInput = {
@@ -9765,8 +9765,8 @@ export namespace Prisma {
     questionNumber?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    interview?: InterviewUpdateOneRequiredWithoutQuestionsNestedInput
     answer?: AnswerUpdateOneWithoutQuestionNestedInput
+    interview?: InterviewUpdateOneRequiredWithoutQuestionsNestedInput
   }
 
   export type QuestionUncheckedUpdateInput = {
@@ -9930,8 +9930,8 @@ export namespace Prisma {
     overallFeedback?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutReportsInput
     interview: InterviewCreateNestedOneWithoutReportInput
+    user: UserCreateNestedOneWithoutReportsInput
   }
 
   export type ReportUncheckedCreateInput = {
@@ -9967,8 +9967,8 @@ export namespace Prisma {
     overallFeedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutReportsNestedInput
     interview?: InterviewUpdateOneRequiredWithoutReportNestedInput
+    user?: UserUpdateOneRequiredWithoutReportsNestedInput
   }
 
   export type ReportUncheckedUpdateInput = {
@@ -10081,12 +10081,6 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type ResumeListRelationFilter = {
-    every?: ResumeWhereInput
-    some?: ResumeWhereInput
-    none?: ResumeWhereInput
-  }
-
   export type InterviewListRelationFilter = {
     every?: InterviewWhereInput
     some?: InterviewWhereInput
@@ -10099,8 +10093,10 @@ export namespace Prisma {
     none?: ReportWhereInput
   }
 
-  export type ResumeOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type ResumeListRelationFilter = {
+    every?: ResumeWhereInput
+    some?: ResumeWhereInput
+    none?: ResumeWhereInput
   }
 
   export type InterviewOrderByRelationAggregateInput = {
@@ -10108,6 +10104,10 @@ export namespace Prisma {
   }
 
   export type ReportOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ResumeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -10461,14 +10461,14 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type InterviewScalarRelationFilter = {
-    is?: InterviewWhereInput
-    isNot?: InterviewWhereInput
-  }
-
   export type AnswerNullableScalarRelationFilter = {
     is?: AnswerWhereInput | null
     isNot?: AnswerWhereInput | null
+  }
+
+  export type InterviewScalarRelationFilter = {
+    is?: InterviewWhereInput
+    isNot?: InterviewWhereInput
   }
 
   export type QuestionCountOrderByAggregateInput = {
@@ -10709,13 +10709,6 @@ export namespace Prisma {
     problemSolvingScore?: SortOrder
   }
 
-  export type ResumeCreateNestedManyWithoutUserInput = {
-    create?: XOR<ResumeCreateWithoutUserInput, ResumeUncheckedCreateWithoutUserInput> | ResumeCreateWithoutUserInput[] | ResumeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ResumeCreateOrConnectWithoutUserInput | ResumeCreateOrConnectWithoutUserInput[]
-    createMany?: ResumeCreateManyUserInputEnvelope
-    connect?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
-  }
-
   export type InterviewCreateNestedManyWithoutUserInput = {
     create?: XOR<InterviewCreateWithoutUserInput, InterviewUncheckedCreateWithoutUserInput> | InterviewCreateWithoutUserInput[] | InterviewUncheckedCreateWithoutUserInput[]
     connectOrCreate?: InterviewCreateOrConnectWithoutUserInput | InterviewCreateOrConnectWithoutUserInput[]
@@ -10730,7 +10723,7 @@ export namespace Prisma {
     connect?: ReportWhereUniqueInput | ReportWhereUniqueInput[]
   }
 
-  export type ResumeUncheckedCreateNestedManyWithoutUserInput = {
+  export type ResumeCreateNestedManyWithoutUserInput = {
     create?: XOR<ResumeCreateWithoutUserInput, ResumeUncheckedCreateWithoutUserInput> | ResumeCreateWithoutUserInput[] | ResumeUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ResumeCreateOrConnectWithoutUserInput | ResumeCreateOrConnectWithoutUserInput[]
     createMany?: ResumeCreateManyUserInputEnvelope
@@ -10751,26 +10744,19 @@ export namespace Prisma {
     connect?: ReportWhereUniqueInput | ReportWhereUniqueInput[]
   }
 
+  export type ResumeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ResumeCreateWithoutUserInput, ResumeUncheckedCreateWithoutUserInput> | ResumeCreateWithoutUserInput[] | ResumeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ResumeCreateOrConnectWithoutUserInput | ResumeCreateOrConnectWithoutUserInput[]
+    createMany?: ResumeCreateManyUserInputEnvelope
+    connect?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
-  }
-
-  export type ResumeUpdateManyWithoutUserNestedInput = {
-    create?: XOR<ResumeCreateWithoutUserInput, ResumeUncheckedCreateWithoutUserInput> | ResumeCreateWithoutUserInput[] | ResumeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: ResumeCreateOrConnectWithoutUserInput | ResumeCreateOrConnectWithoutUserInput[]
-    upsert?: ResumeUpsertWithWhereUniqueWithoutUserInput | ResumeUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: ResumeCreateManyUserInputEnvelope
-    set?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
-    disconnect?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
-    delete?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
-    connect?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
-    update?: ResumeUpdateWithWhereUniqueWithoutUserInput | ResumeUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: ResumeUpdateManyWithWhereWithoutUserInput | ResumeUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: ResumeScalarWhereInput | ResumeScalarWhereInput[]
   }
 
   export type InterviewUpdateManyWithoutUserNestedInput = {
@@ -10801,15 +10787,7 @@ export namespace Prisma {
     deleteMany?: ReportScalarWhereInput | ReportScalarWhereInput[]
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type ResumeUncheckedUpdateManyWithoutUserNestedInput = {
+  export type ResumeUpdateManyWithoutUserNestedInput = {
     create?: XOR<ResumeCreateWithoutUserInput, ResumeUncheckedCreateWithoutUserInput> | ResumeCreateWithoutUserInput[] | ResumeUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ResumeCreateOrConnectWithoutUserInput | ResumeCreateOrConnectWithoutUserInput[]
     upsert?: ResumeUpsertWithWhereUniqueWithoutUserInput | ResumeUpsertWithWhereUniqueWithoutUserInput[]
@@ -10821,6 +10799,14 @@ export namespace Prisma {
     update?: ResumeUpdateWithWhereUniqueWithoutUserInput | ResumeUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ResumeUpdateManyWithWhereWithoutUserInput | ResumeUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ResumeScalarWhereInput | ResumeScalarWhereInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type InterviewUncheckedUpdateManyWithoutUserNestedInput = {
@@ -10851,10 +10837,18 @@ export namespace Prisma {
     deleteMany?: ReportScalarWhereInput | ReportScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutResumesInput = {
-    create?: XOR<UserCreateWithoutResumesInput, UserUncheckedCreateWithoutResumesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutResumesInput
-    connect?: UserWhereUniqueInput
+  export type ResumeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ResumeCreateWithoutUserInput, ResumeUncheckedCreateWithoutUserInput> | ResumeCreateWithoutUserInput[] | ResumeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ResumeCreateOrConnectWithoutUserInput | ResumeCreateOrConnectWithoutUserInput[]
+    upsert?: ResumeUpsertWithWhereUniqueWithoutUserInput | ResumeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ResumeCreateManyUserInputEnvelope
+    set?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
+    disconnect?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
+    delete?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
+    connect?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
+    update?: ResumeUpdateWithWhereUniqueWithoutUserInput | ResumeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ResumeUpdateManyWithWhereWithoutUserInput | ResumeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ResumeScalarWhereInput | ResumeScalarWhereInput[]
   }
 
   export type InterviewCreateNestedManyWithoutResumeInput = {
@@ -10862,6 +10856,12 @@ export namespace Prisma {
     connectOrCreate?: InterviewCreateOrConnectWithoutResumeInput | InterviewCreateOrConnectWithoutResumeInput[]
     createMany?: InterviewCreateManyResumeInputEnvelope
     connect?: InterviewWhereUniqueInput | InterviewWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedOneWithoutResumesInput = {
+    create?: XOR<UserCreateWithoutResumesInput, UserUncheckedCreateWithoutResumesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutResumesInput
+    connect?: UserWhereUniqueInput
   }
 
   export type InterviewUncheckedCreateNestedManyWithoutResumeInput = {
@@ -10873,14 +10873,6 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
-  }
-
-  export type UserUpdateOneRequiredWithoutResumesNestedInput = {
-    create?: XOR<UserCreateWithoutResumesInput, UserUncheckedCreateWithoutResumesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutResumesInput
-    upsert?: UserUpsertWithoutResumesInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutResumesInput, UserUpdateWithoutResumesInput>, UserUncheckedUpdateWithoutResumesInput>
   }
 
   export type InterviewUpdateManyWithoutResumeNestedInput = {
@@ -10897,6 +10889,14 @@ export namespace Prisma {
     deleteMany?: InterviewScalarWhereInput | InterviewScalarWhereInput[]
   }
 
+  export type UserUpdateOneRequiredWithoutResumesNestedInput = {
+    create?: XOR<UserCreateWithoutResumesInput, UserUncheckedCreateWithoutResumesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutResumesInput
+    upsert?: UserUpsertWithoutResumesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutResumesInput, UserUpdateWithoutResumesInput>, UserUncheckedUpdateWithoutResumesInput>
+  }
+
   export type InterviewUncheckedUpdateManyWithoutResumeNestedInput = {
     create?: XOR<InterviewCreateWithoutResumeInput, InterviewUncheckedCreateWithoutResumeInput> | InterviewCreateWithoutResumeInput[] | InterviewUncheckedCreateWithoutResumeInput[]
     connectOrCreate?: InterviewCreateOrConnectWithoutResumeInput | InterviewCreateOrConnectWithoutResumeInput[]
@@ -10911,16 +10911,16 @@ export namespace Prisma {
     deleteMany?: InterviewScalarWhereInput | InterviewScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutInterviewsInput = {
-    create?: XOR<UserCreateWithoutInterviewsInput, UserUncheckedCreateWithoutInterviewsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutInterviewsInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type ResumeCreateNestedOneWithoutInterviewsInput = {
     create?: XOR<ResumeCreateWithoutInterviewsInput, ResumeUncheckedCreateWithoutInterviewsInput>
     connectOrCreate?: ResumeCreateOrConnectWithoutInterviewsInput
     connect?: ResumeWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutInterviewsInput = {
+    create?: XOR<UserCreateWithoutInterviewsInput, UserUncheckedCreateWithoutInterviewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutInterviewsInput
+    connect?: UserWhereUniqueInput
   }
 
   export type QuestionCreateNestedManyWithoutInterviewInput = {
@@ -10961,20 +10961,20 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
-  export type UserUpdateOneRequiredWithoutInterviewsNestedInput = {
-    create?: XOR<UserCreateWithoutInterviewsInput, UserUncheckedCreateWithoutInterviewsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutInterviewsInput
-    upsert?: UserUpsertWithoutInterviewsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutInterviewsInput, UserUpdateWithoutInterviewsInput>, UserUncheckedUpdateWithoutInterviewsInput>
-  }
-
   export type ResumeUpdateOneRequiredWithoutInterviewsNestedInput = {
     create?: XOR<ResumeCreateWithoutInterviewsInput, ResumeUncheckedCreateWithoutInterviewsInput>
     connectOrCreate?: ResumeCreateOrConnectWithoutInterviewsInput
     upsert?: ResumeUpsertWithoutInterviewsInput
     connect?: ResumeWhereUniqueInput
     update?: XOR<XOR<ResumeUpdateToOneWithWhereWithoutInterviewsInput, ResumeUpdateWithoutInterviewsInput>, ResumeUncheckedUpdateWithoutInterviewsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutInterviewsNestedInput = {
+    create?: XOR<UserCreateWithoutInterviewsInput, UserUncheckedCreateWithoutInterviewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutInterviewsInput
+    upsert?: UserUpsertWithoutInterviewsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutInterviewsInput, UserUpdateWithoutInterviewsInput>, UserUncheckedUpdateWithoutInterviewsInput>
   }
 
   export type QuestionUpdateManyWithoutInterviewNestedInput = {
@@ -11025,30 +11025,22 @@ export namespace Prisma {
     update?: XOR<XOR<ReportUpdateToOneWithWhereWithoutInterviewInput, ReportUpdateWithoutInterviewInput>, ReportUncheckedUpdateWithoutInterviewInput>
   }
 
-  export type InterviewCreateNestedOneWithoutQuestionsInput = {
-    create?: XOR<InterviewCreateWithoutQuestionsInput, InterviewUncheckedCreateWithoutQuestionsInput>
-    connectOrCreate?: InterviewCreateOrConnectWithoutQuestionsInput
-    connect?: InterviewWhereUniqueInput
-  }
-
   export type AnswerCreateNestedOneWithoutQuestionInput = {
     create?: XOR<AnswerCreateWithoutQuestionInput, AnswerUncheckedCreateWithoutQuestionInput>
     connectOrCreate?: AnswerCreateOrConnectWithoutQuestionInput
     connect?: AnswerWhereUniqueInput
   }
 
+  export type InterviewCreateNestedOneWithoutQuestionsInput = {
+    create?: XOR<InterviewCreateWithoutQuestionsInput, InterviewUncheckedCreateWithoutQuestionsInput>
+    connectOrCreate?: InterviewCreateOrConnectWithoutQuestionsInput
+    connect?: InterviewWhereUniqueInput
+  }
+
   export type AnswerUncheckedCreateNestedOneWithoutQuestionInput = {
     create?: XOR<AnswerCreateWithoutQuestionInput, AnswerUncheckedCreateWithoutQuestionInput>
     connectOrCreate?: AnswerCreateOrConnectWithoutQuestionInput
     connect?: AnswerWhereUniqueInput
-  }
-
-  export type InterviewUpdateOneRequiredWithoutQuestionsNestedInput = {
-    create?: XOR<InterviewCreateWithoutQuestionsInput, InterviewUncheckedCreateWithoutQuestionsInput>
-    connectOrCreate?: InterviewCreateOrConnectWithoutQuestionsInput
-    upsert?: InterviewUpsertWithoutQuestionsInput
-    connect?: InterviewWhereUniqueInput
-    update?: XOR<XOR<InterviewUpdateToOneWithWhereWithoutQuestionsInput, InterviewUpdateWithoutQuestionsInput>, InterviewUncheckedUpdateWithoutQuestionsInput>
   }
 
   export type AnswerUpdateOneWithoutQuestionNestedInput = {
@@ -11059,6 +11051,14 @@ export namespace Prisma {
     delete?: AnswerWhereInput | boolean
     connect?: AnswerWhereUniqueInput
     update?: XOR<XOR<AnswerUpdateToOneWithWhereWithoutQuestionInput, AnswerUpdateWithoutQuestionInput>, AnswerUncheckedUpdateWithoutQuestionInput>
+  }
+
+  export type InterviewUpdateOneRequiredWithoutQuestionsNestedInput = {
+    create?: XOR<InterviewCreateWithoutQuestionsInput, InterviewUncheckedCreateWithoutQuestionsInput>
+    connectOrCreate?: InterviewCreateOrConnectWithoutQuestionsInput
+    upsert?: InterviewUpsertWithoutQuestionsInput
+    connect?: InterviewWhereUniqueInput
+    update?: XOR<XOR<InterviewUpdateToOneWithWhereWithoutQuestionsInput, InterviewUpdateWithoutQuestionsInput>, InterviewUncheckedUpdateWithoutQuestionsInput>
   }
 
   export type AnswerUncheckedUpdateOneWithoutQuestionNestedInput = {
@@ -11101,24 +11101,16 @@ export namespace Prisma {
     update?: XOR<XOR<QuestionUpdateToOneWithWhereWithoutAnswerInput, QuestionUpdateWithoutAnswerInput>, QuestionUncheckedUpdateWithoutAnswerInput>
   }
 
-  export type UserCreateNestedOneWithoutReportsInput = {
-    create?: XOR<UserCreateWithoutReportsInput, UserUncheckedCreateWithoutReportsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutReportsInput
-    connect?: UserWhereUniqueInput
-  }
-
   export type InterviewCreateNestedOneWithoutReportInput = {
     create?: XOR<InterviewCreateWithoutReportInput, InterviewUncheckedCreateWithoutReportInput>
     connectOrCreate?: InterviewCreateOrConnectWithoutReportInput
     connect?: InterviewWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutReportsNestedInput = {
+  export type UserCreateNestedOneWithoutReportsInput = {
     create?: XOR<UserCreateWithoutReportsInput, UserUncheckedCreateWithoutReportsInput>
     connectOrCreate?: UserCreateOrConnectWithoutReportsInput
-    upsert?: UserUpsertWithoutReportsInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReportsInput, UserUpdateWithoutReportsInput>, UserUncheckedUpdateWithoutReportsInput>
   }
 
   export type InterviewUpdateOneRequiredWithoutReportNestedInput = {
@@ -11127,6 +11119,14 @@ export namespace Prisma {
     upsert?: InterviewUpsertWithoutReportInput
     connect?: InterviewWhereUniqueInput
     update?: XOR<XOR<InterviewUpdateToOneWithWhereWithoutReportInput, InterviewUpdateWithoutReportInput>, InterviewUncheckedUpdateWithoutReportInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutReportsNestedInput = {
+    create?: XOR<UserCreateWithoutReportsInput, UserUncheckedCreateWithoutReportsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReportsInput
+    upsert?: UserUpsertWithoutReportsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReportsInput, UserUpdateWithoutReportsInput>, UserUncheckedUpdateWithoutReportsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -11390,39 +11390,6 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
-  export type ResumeCreateWithoutUserInput = {
-    title: string
-    resumeUrl: string
-    resumeText: string
-    parsedData?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    fileName?: string | null
-    interviews?: InterviewCreateNestedManyWithoutResumeInput
-  }
-
-  export type ResumeUncheckedCreateWithoutUserInput = {
-    id?: number
-    title: string
-    resumeUrl: string
-    resumeText: string
-    parsedData?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    fileName?: string | null
-    interviews?: InterviewUncheckedCreateNestedManyWithoutResumeInput
-  }
-
-  export type ResumeCreateOrConnectWithoutUserInput = {
-    where: ResumeWhereUniqueInput
-    create: XOR<ResumeCreateWithoutUserInput, ResumeUncheckedCreateWithoutUserInput>
-  }
-
-  export type ResumeCreateManyUserInputEnvelope = {
-    data: ResumeCreateManyUserInput | ResumeCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
   export type InterviewCreateWithoutUserInput = {
     title?: string | null
     resumeSnapshot?: NullableJsonNullValueInput | InputJsonValue
@@ -11507,35 +11474,37 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ResumeUpsertWithWhereUniqueWithoutUserInput = {
+  export type ResumeCreateWithoutUserInput = {
+    title: string
+    resumeUrl: string
+    resumeText: string
+    parsedData?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    fileName?: string | null
+    interviews?: InterviewCreateNestedManyWithoutResumeInput
+  }
+
+  export type ResumeUncheckedCreateWithoutUserInput = {
+    id?: number
+    title: string
+    resumeUrl: string
+    resumeText: string
+    parsedData?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    fileName?: string | null
+    interviews?: InterviewUncheckedCreateNestedManyWithoutResumeInput
+  }
+
+  export type ResumeCreateOrConnectWithoutUserInput = {
     where: ResumeWhereUniqueInput
-    update: XOR<ResumeUpdateWithoutUserInput, ResumeUncheckedUpdateWithoutUserInput>
     create: XOR<ResumeCreateWithoutUserInput, ResumeUncheckedCreateWithoutUserInput>
   }
 
-  export type ResumeUpdateWithWhereUniqueWithoutUserInput = {
-    where: ResumeWhereUniqueInput
-    data: XOR<ResumeUpdateWithoutUserInput, ResumeUncheckedUpdateWithoutUserInput>
-  }
-
-  export type ResumeUpdateManyWithWhereWithoutUserInput = {
-    where: ResumeScalarWhereInput
-    data: XOR<ResumeUpdateManyMutationInput, ResumeUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type ResumeScalarWhereInput = {
-    AND?: ResumeScalarWhereInput | ResumeScalarWhereInput[]
-    OR?: ResumeScalarWhereInput[]
-    NOT?: ResumeScalarWhereInput | ResumeScalarWhereInput[]
-    id?: IntFilter<"Resume"> | number
-    title?: StringFilter<"Resume"> | string
-    userId?: IntFilter<"Resume"> | number
-    resumeUrl?: StringFilter<"Resume"> | string
-    resumeText?: StringFilter<"Resume"> | string
-    parsedData?: JsonNullableFilter<"Resume">
-    createdAt?: DateTimeFilter<"Resume"> | Date | string
-    updatedAt?: DateTimeFilter<"Resume"> | Date | string
-    fileName?: StringNullableFilter<"Resume"> | string | null
+  export type ResumeCreateManyUserInputEnvelope = {
+    data: ResumeCreateManyUserInput | ResumeCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type InterviewUpsertWithWhereUniqueWithoutUserInput = {
@@ -11609,30 +11578,35 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Report"> | Date | string
   }
 
-  export type UserCreateWithoutResumesInput = {
-    name: string
-    email: string
-    password: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    interviews?: InterviewCreateNestedManyWithoutUserInput
-    reports?: ReportCreateNestedManyWithoutUserInput
+  export type ResumeUpsertWithWhereUniqueWithoutUserInput = {
+    where: ResumeWhereUniqueInput
+    update: XOR<ResumeUpdateWithoutUserInput, ResumeUncheckedUpdateWithoutUserInput>
+    create: XOR<ResumeCreateWithoutUserInput, ResumeUncheckedCreateWithoutUserInput>
   }
 
-  export type UserUncheckedCreateWithoutResumesInput = {
-    id?: number
-    name: string
-    email: string
-    password: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    interviews?: InterviewUncheckedCreateNestedManyWithoutUserInput
-    reports?: ReportUncheckedCreateNestedManyWithoutUserInput
+  export type ResumeUpdateWithWhereUniqueWithoutUserInput = {
+    where: ResumeWhereUniqueInput
+    data: XOR<ResumeUpdateWithoutUserInput, ResumeUncheckedUpdateWithoutUserInput>
   }
 
-  export type UserCreateOrConnectWithoutResumesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutResumesInput, UserUncheckedCreateWithoutResumesInput>
+  export type ResumeUpdateManyWithWhereWithoutUserInput = {
+    where: ResumeScalarWhereInput
+    data: XOR<ResumeUpdateManyMutationInput, ResumeUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ResumeScalarWhereInput = {
+    AND?: ResumeScalarWhereInput | ResumeScalarWhereInput[]
+    OR?: ResumeScalarWhereInput[]
+    NOT?: ResumeScalarWhereInput | ResumeScalarWhereInput[]
+    id?: IntFilter<"Resume"> | number
+    title?: StringFilter<"Resume"> | string
+    userId?: IntFilter<"Resume"> | number
+    resumeUrl?: StringFilter<"Resume"> | string
+    resumeText?: StringFilter<"Resume"> | string
+    parsedData?: JsonNullableFilter<"Resume">
+    createdAt?: DateTimeFilter<"Resume"> | Date | string
+    updatedAt?: DateTimeFilter<"Resume"> | Date | string
+    fileName?: StringNullableFilter<"Resume"> | string | null
   }
 
   export type InterviewCreateWithoutResumeInput = {
@@ -11674,6 +11648,48 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserCreateWithoutResumesInput = {
+    name: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    interviews?: InterviewCreateNestedManyWithoutUserInput
+    reports?: ReportCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutResumesInput = {
+    id?: number
+    name: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    interviews?: InterviewUncheckedCreateNestedManyWithoutUserInput
+    reports?: ReportUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutResumesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutResumesInput, UserUncheckedCreateWithoutResumesInput>
+  }
+
+  export type InterviewUpsertWithWhereUniqueWithoutResumeInput = {
+    where: InterviewWhereUniqueInput
+    update: XOR<InterviewUpdateWithoutResumeInput, InterviewUncheckedUpdateWithoutResumeInput>
+    create: XOR<InterviewCreateWithoutResumeInput, InterviewUncheckedCreateWithoutResumeInput>
+  }
+
+  export type InterviewUpdateWithWhereUniqueWithoutResumeInput = {
+    where: InterviewWhereUniqueInput
+    data: XOR<InterviewUpdateWithoutResumeInput, InterviewUncheckedUpdateWithoutResumeInput>
+  }
+
+  export type InterviewUpdateManyWithWhereWithoutResumeInput = {
+    where: InterviewScalarWhereInput
+    data: XOR<InterviewUpdateManyMutationInput, InterviewUncheckedUpdateManyWithoutResumeInput>
+  }
+
   export type UserUpsertWithoutResumesInput = {
     update: XOR<UserUpdateWithoutResumesInput, UserUncheckedUpdateWithoutResumesInput>
     create: XOR<UserCreateWithoutResumesInput, UserUncheckedCreateWithoutResumesInput>
@@ -11706,48 +11722,6 @@ export namespace Prisma {
     reports?: ReportUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type InterviewUpsertWithWhereUniqueWithoutResumeInput = {
-    where: InterviewWhereUniqueInput
-    update: XOR<InterviewUpdateWithoutResumeInput, InterviewUncheckedUpdateWithoutResumeInput>
-    create: XOR<InterviewCreateWithoutResumeInput, InterviewUncheckedCreateWithoutResumeInput>
-  }
-
-  export type InterviewUpdateWithWhereUniqueWithoutResumeInput = {
-    where: InterviewWhereUniqueInput
-    data: XOR<InterviewUpdateWithoutResumeInput, InterviewUncheckedUpdateWithoutResumeInput>
-  }
-
-  export type InterviewUpdateManyWithWhereWithoutResumeInput = {
-    where: InterviewScalarWhereInput
-    data: XOR<InterviewUpdateManyMutationInput, InterviewUncheckedUpdateManyWithoutResumeInput>
-  }
-
-  export type UserCreateWithoutInterviewsInput = {
-    name: string
-    email: string
-    password: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    resumes?: ResumeCreateNestedManyWithoutUserInput
-    reports?: ReportCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutInterviewsInput = {
-    id?: number
-    name: string
-    email: string
-    password: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    resumes?: ResumeUncheckedCreateNestedManyWithoutUserInput
-    reports?: ReportUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutInterviewsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutInterviewsInput, UserUncheckedCreateWithoutInterviewsInput>
-  }
-
   export type ResumeCreateWithoutInterviewsInput = {
     title: string
     resumeUrl: string
@@ -11774,6 +11748,32 @@ export namespace Prisma {
   export type ResumeCreateOrConnectWithoutInterviewsInput = {
     where: ResumeWhereUniqueInput
     create: XOR<ResumeCreateWithoutInterviewsInput, ResumeUncheckedCreateWithoutInterviewsInput>
+  }
+
+  export type UserCreateWithoutInterviewsInput = {
+    name: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reports?: ReportCreateNestedManyWithoutUserInput
+    resumes?: ResumeCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutInterviewsInput = {
+    id?: number
+    name: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reports?: ReportUncheckedCreateNestedManyWithoutUserInput
+    resumes?: ResumeUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutInterviewsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutInterviewsInput, UserUncheckedCreateWithoutInterviewsInput>
   }
 
   export type QuestionCreateWithoutInterviewInput = {
@@ -11845,38 +11845,6 @@ export namespace Prisma {
     create: XOR<ReportCreateWithoutInterviewInput, ReportUncheckedCreateWithoutInterviewInput>
   }
 
-  export type UserUpsertWithoutInterviewsInput = {
-    update: XOR<UserUpdateWithoutInterviewsInput, UserUncheckedUpdateWithoutInterviewsInput>
-    create: XOR<UserCreateWithoutInterviewsInput, UserUncheckedCreateWithoutInterviewsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutInterviewsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutInterviewsInput, UserUncheckedUpdateWithoutInterviewsInput>
-  }
-
-  export type UserUpdateWithoutInterviewsInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    resumes?: ResumeUpdateManyWithoutUserNestedInput
-    reports?: ReportUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutInterviewsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    resumes?: ResumeUncheckedUpdateManyWithoutUserNestedInput
-    reports?: ReportUncheckedUpdateManyWithoutUserNestedInput
-  }
-
   export type ResumeUpsertWithoutInterviewsInput = {
     update: XOR<ResumeUpdateWithoutInterviewsInput, ResumeUncheckedUpdateWithoutInterviewsInput>
     create: XOR<ResumeCreateWithoutInterviewsInput, ResumeUncheckedCreateWithoutInterviewsInput>
@@ -11909,6 +11877,38 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fileName?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type UserUpsertWithoutInterviewsInput = {
+    update: XOR<UserUpdateWithoutInterviewsInput, UserUncheckedUpdateWithoutInterviewsInput>
+    create: XOR<UserCreateWithoutInterviewsInput, UserUncheckedCreateWithoutInterviewsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutInterviewsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutInterviewsInput, UserUncheckedUpdateWithoutInterviewsInput>
+  }
+
+  export type UserUpdateWithoutInterviewsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reports?: ReportUpdateManyWithoutUserNestedInput
+    resumes?: ResumeUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutInterviewsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reports?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    resumes?: ResumeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type QuestionUpsertWithWhereUniqueWithoutInterviewInput = {
@@ -11986,40 +11986,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type InterviewCreateWithoutQuestionsInput = {
-    title?: string | null
-    resumeSnapshot?: NullableJsonNullValueInput | InputJsonValue
-    difficulty?: $Enums.Difficulty
-    status?: $Enums.InterviewStatus
-    startedAt?: Date | string | null
-    endedAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutInterviewsInput
-    resume: ResumeCreateNestedOneWithoutInterviewsInput
-    report?: ReportCreateNestedOneWithoutInterviewInput
-  }
-
-  export type InterviewUncheckedCreateWithoutQuestionsInput = {
-    id?: number
-    userId: number
-    title?: string | null
-    resumeSnapshot?: NullableJsonNullValueInput | InputJsonValue
-    resumeId: number
-    difficulty?: $Enums.Difficulty
-    status?: $Enums.InterviewStatus
-    startedAt?: Date | string | null
-    endedAt?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    report?: ReportUncheckedCreateNestedOneWithoutInterviewInput
-  }
-
-  export type InterviewCreateOrConnectWithoutQuestionsInput = {
-    where: InterviewWhereUniqueInput
-    create: XOR<InterviewCreateWithoutQuestionsInput, InterviewUncheckedCreateWithoutQuestionsInput>
-  }
-
   export type AnswerCreateWithoutQuestionInput = {
     answer: string
     score: number
@@ -12054,44 +12020,38 @@ export namespace Prisma {
     create: XOR<AnswerCreateWithoutQuestionInput, AnswerUncheckedCreateWithoutQuestionInput>
   }
 
-  export type InterviewUpsertWithoutQuestionsInput = {
-    update: XOR<InterviewUpdateWithoutQuestionsInput, InterviewUncheckedUpdateWithoutQuestionsInput>
+  export type InterviewCreateWithoutQuestionsInput = {
+    title?: string | null
+    resumeSnapshot?: NullableJsonNullValueInput | InputJsonValue
+    difficulty?: $Enums.Difficulty
+    status?: $Enums.InterviewStatus
+    startedAt?: Date | string | null
+    endedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    resume: ResumeCreateNestedOneWithoutInterviewsInput
+    user: UserCreateNestedOneWithoutInterviewsInput
+    report?: ReportCreateNestedOneWithoutInterviewInput
+  }
+
+  export type InterviewUncheckedCreateWithoutQuestionsInput = {
+    id?: number
+    userId: number
+    title?: string | null
+    resumeSnapshot?: NullableJsonNullValueInput | InputJsonValue
+    resumeId: number
+    difficulty?: $Enums.Difficulty
+    status?: $Enums.InterviewStatus
+    startedAt?: Date | string | null
+    endedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    report?: ReportUncheckedCreateNestedOneWithoutInterviewInput
+  }
+
+  export type InterviewCreateOrConnectWithoutQuestionsInput = {
+    where: InterviewWhereUniqueInput
     create: XOR<InterviewCreateWithoutQuestionsInput, InterviewUncheckedCreateWithoutQuestionsInput>
-    where?: InterviewWhereInput
-  }
-
-  export type InterviewUpdateToOneWithWhereWithoutQuestionsInput = {
-    where?: InterviewWhereInput
-    data: XOR<InterviewUpdateWithoutQuestionsInput, InterviewUncheckedUpdateWithoutQuestionsInput>
-  }
-
-  export type InterviewUpdateWithoutQuestionsInput = {
-    title?: NullableStringFieldUpdateOperationsInput | string | null
-    resumeSnapshot?: NullableJsonNullValueInput | InputJsonValue
-    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
-    status?: EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
-    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutInterviewsNestedInput
-    resume?: ResumeUpdateOneRequiredWithoutInterviewsNestedInput
-    report?: ReportUpdateOneWithoutInterviewNestedInput
-  }
-
-  export type InterviewUncheckedUpdateWithoutQuestionsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    userId?: IntFieldUpdateOperationsInput | number
-    title?: NullableStringFieldUpdateOperationsInput | string | null
-    resumeSnapshot?: NullableJsonNullValueInput | InputJsonValue
-    resumeId?: IntFieldUpdateOperationsInput | number
-    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
-    status?: EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
-    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    report?: ReportUncheckedUpdateOneWithoutInterviewNestedInput
   }
 
   export type AnswerUpsertWithoutQuestionInput = {
@@ -12132,6 +12092,46 @@ export namespace Prisma {
     answeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InterviewUpsertWithoutQuestionsInput = {
+    update: XOR<InterviewUpdateWithoutQuestionsInput, InterviewUncheckedUpdateWithoutQuestionsInput>
+    create: XOR<InterviewCreateWithoutQuestionsInput, InterviewUncheckedCreateWithoutQuestionsInput>
+    where?: InterviewWhereInput
+  }
+
+  export type InterviewUpdateToOneWithWhereWithoutQuestionsInput = {
+    where?: InterviewWhereInput
+    data: XOR<InterviewUpdateWithoutQuestionsInput, InterviewUncheckedUpdateWithoutQuestionsInput>
+  }
+
+  export type InterviewUpdateWithoutQuestionsInput = {
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeSnapshot?: NullableJsonNullValueInput | InputJsonValue
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    status?: EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resume?: ResumeUpdateOneRequiredWithoutInterviewsNestedInput
+    user?: UserUpdateOneRequiredWithoutInterviewsNestedInput
+    report?: ReportUpdateOneWithoutInterviewNestedInput
+  }
+
+  export type InterviewUncheckedUpdateWithoutQuestionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeSnapshot?: NullableJsonNullValueInput | InputJsonValue
+    resumeId?: IntFieldUpdateOperationsInput | number
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    status?: EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    report?: ReportUncheckedUpdateOneWithoutInterviewNestedInput
   }
 
   export type QuestionCreateWithoutAnswerInput = {
@@ -12188,32 +12188,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserCreateWithoutReportsInput = {
-    name: string
-    email: string
-    password: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    resumes?: ResumeCreateNestedManyWithoutUserInput
-    interviews?: InterviewCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutReportsInput = {
-    id?: number
-    name: string
-    email: string
-    password: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    resumes?: ResumeUncheckedCreateNestedManyWithoutUserInput
-    interviews?: InterviewUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutReportsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutReportsInput, UserUncheckedCreateWithoutReportsInput>
-  }
-
   export type InterviewCreateWithoutReportInput = {
     title?: string | null
     resumeSnapshot?: NullableJsonNullValueInput | InputJsonValue
@@ -12223,8 +12197,8 @@ export namespace Prisma {
     endedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutInterviewsInput
     resume: ResumeCreateNestedOneWithoutInterviewsInput
+    user: UserCreateNestedOneWithoutInterviewsInput
     questions?: QuestionCreateNestedManyWithoutInterviewInput
   }
 
@@ -12248,36 +12222,30 @@ export namespace Prisma {
     create: XOR<InterviewCreateWithoutReportInput, InterviewUncheckedCreateWithoutReportInput>
   }
 
-  export type UserUpsertWithoutReportsInput = {
-    update: XOR<UserUpdateWithoutReportsInput, UserUncheckedUpdateWithoutReportsInput>
+  export type UserCreateWithoutReportsInput = {
+    name: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    interviews?: InterviewCreateNestedManyWithoutUserInput
+    resumes?: ResumeCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutReportsInput = {
+    id?: number
+    name: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    interviews?: InterviewUncheckedCreateNestedManyWithoutUserInput
+    resumes?: ResumeUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutReportsInput = {
+    where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutReportsInput, UserUncheckedCreateWithoutReportsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutReportsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutReportsInput, UserUncheckedUpdateWithoutReportsInput>
-  }
-
-  export type UserUpdateWithoutReportsInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    resumes?: ResumeUpdateManyWithoutUserNestedInput
-    interviews?: InterviewUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutReportsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    resumes?: ResumeUncheckedUpdateManyWithoutUserNestedInput
-    interviews?: InterviewUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type InterviewUpsertWithoutReportInput = {
@@ -12300,8 +12268,8 @@ export namespace Prisma {
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutInterviewsNestedInput
     resume?: ResumeUpdateOneRequiredWithoutInterviewsNestedInput
+    user?: UserUpdateOneRequiredWithoutInterviewsNestedInput
     questions?: QuestionUpdateManyWithoutInterviewNestedInput
   }
 
@@ -12320,15 +12288,36 @@ export namespace Prisma {
     questions?: QuestionUncheckedUpdateManyWithoutInterviewNestedInput
   }
 
-  export type ResumeCreateManyUserInput = {
-    id?: number
-    title: string
-    resumeUrl: string
-    resumeText: string
-    parsedData?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    fileName?: string | null
+  export type UserUpsertWithoutReportsInput = {
+    update: XOR<UserUpdateWithoutReportsInput, UserUncheckedUpdateWithoutReportsInput>
+    create: XOR<UserCreateWithoutReportsInput, UserUncheckedCreateWithoutReportsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReportsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReportsInput, UserUncheckedUpdateWithoutReportsInput>
+  }
+
+  export type UserUpdateWithoutReportsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    interviews?: InterviewUpdateManyWithoutUserNestedInput
+    resumes?: ResumeUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReportsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    interviews?: InterviewUncheckedUpdateManyWithoutUserNestedInput
+    resumes?: ResumeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type InterviewCreateManyUserInput = {
@@ -12362,38 +12351,15 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type ResumeUpdateWithoutUserInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    resumeUrl?: StringFieldUpdateOperationsInput | string
-    resumeText?: StringFieldUpdateOperationsInput | string
+  export type ResumeCreateManyUserInput = {
+    id?: number
+    title: string
+    resumeUrl: string
+    resumeText: string
     parsedData?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    fileName?: NullableStringFieldUpdateOperationsInput | string | null
-    interviews?: InterviewUpdateManyWithoutResumeNestedInput
-  }
-
-  export type ResumeUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    resumeUrl?: StringFieldUpdateOperationsInput | string
-    resumeText?: StringFieldUpdateOperationsInput | string
-    parsedData?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    fileName?: NullableStringFieldUpdateOperationsInput | string | null
-    interviews?: InterviewUncheckedUpdateManyWithoutResumeNestedInput
-  }
-
-  export type ResumeUncheckedUpdateManyWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    resumeUrl?: StringFieldUpdateOperationsInput | string
-    resumeText?: StringFieldUpdateOperationsInput | string
-    parsedData?: NullableJsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    fileName?: string | null
   }
 
   export type InterviewUpdateWithoutUserInput = {
@@ -12489,6 +12455,40 @@ export namespace Prisma {
     overallFeedback?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ResumeUpdateWithoutUserInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    resumeUrl?: StringFieldUpdateOperationsInput | string
+    resumeText?: StringFieldUpdateOperationsInput | string
+    parsedData?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    interviews?: InterviewUpdateManyWithoutResumeNestedInput
+  }
+
+  export type ResumeUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    resumeUrl?: StringFieldUpdateOperationsInput | string
+    resumeText?: StringFieldUpdateOperationsInput | string
+    parsedData?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
+    interviews?: InterviewUncheckedUpdateManyWithoutResumeNestedInput
+  }
+
+  export type ResumeUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    resumeUrl?: StringFieldUpdateOperationsInput | string
+    resumeText?: StringFieldUpdateOperationsInput | string
+    parsedData?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    fileName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type InterviewCreateManyResumeInput = {
