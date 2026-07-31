@@ -1,6 +1,7 @@
 import prisma from "../config/prisma.js";
 import { evaluateAnswerWithGemini, generateInterviewQuestions } from "../services/gemini.service.js";
 import { InterviewStatus } from "../generated/prisma/index.js";
+import { generateInterviewReport } from "../services/report.service.js"
 
 export const getInterviewQuestions = async (req, res) => {
     try {
@@ -278,6 +279,239 @@ export const submitAnswer = async (req, res) => {
             success: true,
             message: "Answer submitted successfully.",
             answer: savedAnswer,
+        });
+    } catch (err) {
+        console.error(err);
+
+        return res.status(500).json({
+            success: false,
+            message: err.message,
+        });
+    }
+};
+
+export const getInterviewReport = async (req, res) => {
+    try {
+        const { interviewId } = req.params;
+        const userId = req.user.id;
+
+        const interviewIdNumber = Number(interviewId);
+
+        if (isNaN(interviewIdNumber)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid interview ID.",
+            });
+        }
+
+        const interview = await prisma.interview.findUnique({
+            where: {
+                id: interviewIdNumber,
+            },
+            include: {
+                report: true,
+            },
+        });
+
+        if (!interview) {
+            return res.status(404).json({
+                success: false,
+                message: "Interview not found.",
+            });
+        }
+
+        if (interview.userId !== userId) {
+            return res.status(403).json({
+                success: false,
+                message: "Unauthorized access.",
+            });
+        }
+
+        if (interview.status !== InterviewStatus.COMPLETED) {
+            return res.status(400).json({
+                success: false,
+                message: "Interview is not completed yet.",
+            });
+        }
+
+        if (interview.report) {
+            return res.status(200).json({
+                success: true,
+                report: interview.report,
+            });
+        }
+
+        const questions = await prisma.question.findMany({
+            where: {
+                interviewId: interviewIdNumber,
+            },
+            include: {
+                answer: true,
+            },
+            orderBy: {
+                questionNumber: "asc",
+            },
+        });
+
+        if (questions.some((question) => !question.answer)) {
+            return res.status(400).json({
+                success: false,
+                message: "Some interview answers are missing.",
+            });
+        }
+
+        const interviewData = questions.map((question) => ({
+            question: question.question,
+            topic: question.topic,
+            candidateAnswer: question.answer?.answer,
+            score: question.answer?.score,
+            feedback: question.answer?.feedback,
+            idealAnswer: question.answer?.idealAnswer,
+            missingPoints: question.answer?.missingPoints,
+        }));
+
+        const reportData = await generateInterviewReport(interviewData);
+        const report = await prisma.report.create({
+            data: {
+                userId,
+                interviewId: interviewIdNumber,
+                duration: interview.endedAt && interview.createdAt
+                    ? Math.floor(
+                        (new Date(interview.endedAt) - new Date(interview.createdAt)) / 1000
+                    )
+                    : null,
+                overallScore: reportData.overallScore,
+                technicalScore: reportData.technicalScore,
+                communicationScore: reportData.communicationScore,
+                confidenceScore: reportData.confidenceScore,
+                problemSolvingScore: reportData.problemSolvingScore,
+                strengths: reportData.strengths,
+                weaknesses: reportData.weaknesses,
+                improvementPlan: reportData.improvementPlan,
+                overallFeedback: reportData.overallFeedback,
+            },
+        });
+
+        return res.status(200).json({
+            success: true,
+            report,
+        })
+
+    } catch (err) {
+        console.error(err);
+
+        return res.status(500).json({
+            success: false,
+            message: err.message,
+        });
+    }
+};
+
+export const getInterviewHistory = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const interviews = await prisma.interview.findMany({
+            where: {
+                userId,
+            },
+            include: {
+                report: {
+                    select: {
+                        overallScore: true,
+                    },
+                },
+            },
+            orderBy: {
+                createdAt: "desc",
+            },
+        });
+
+        const formattedInterviews = interviews.map((interview) => ({
+            id: interview.id,
+            title: interview.title,
+            difficulty: interview.difficulty,
+            status: interview.status,
+            createdAt: interview.createdAt,
+            overallScore: interview.report?.overallScore ?? null,
+        }));
+
+        return res.status(200).json({
+            success: true,
+            interviews: formattedInterviews,
+        });
+
+    } catch (err) {
+        console.error(err);
+
+        return res.status(500).json({
+            success: false,
+            message: err.message,
+        });
+    }
+};
+
+export const deleteInterview = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const interviewId = Number(req.params.interviewId);
+
+        if (isNaN(interviewId)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid interview id.",
+            });
+        }
+
+        const interview = await prisma.interview.findFirst({
+            where: {
+                id: interviewId,
+                userId,
+            },
+        });
+
+        if (!interview) {
+            return res.status(404).json({
+                success: false,
+                message: "Interview not found.",
+            });
+        }
+
+        // thru transaction
+        // await prisma.$transaction(async (tx) => {
+        //     await tx.answer.deleteMany({
+        //         where: {
+        //             question: {
+        //                 interviewId,
+        //             },
+        //         },
+        //     });
+        //     await tx.question.deleteMany({
+        //         where: {
+        //             interviewId,
+        //         },
+        //     });
+        //     await tx.report.deleteMany({
+        //         where: {
+        //             interviewId,
+        //         },
+        //     });
+        //     await tx.interview.delete({
+        //         where: {
+        //             id: interviewId,
+        //         },
+        //     });
+        // });
+
+        // thru cascade delete after fixing db
+        await prisma.interview.delete({
+            where: {
+                id: interviewId,
+            },
+        });
+
+        return res.status(200).json({
+            success: true,
+            message: "Interview deleted successfully.",
         });
     } catch (err) {
         console.error(err);

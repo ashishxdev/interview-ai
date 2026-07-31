@@ -188,7 +188,6 @@ exports.Prisma.ReportScalarFieldEnum = {
   interviewId: 'interviewId',
   overallScore: 'overallScore',
   technicalScore: 'technicalScore',
-  explanation: 'explanation',
   communicationScore: 'communicationScore',
   confidenceScore: 'confidenceScore',
   problemSolvingScore: 'problemSolvingScore',

@@ -64,7 +64,7 @@ model Question {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   answer         Answer?
-  interview      Interview @relation(fields: [interviewId], references: [id])
+  interview Interview @relation(fields: [interviewId], references: [id], onDelete: Cascade)
 }
 
 model Answer {
@@ -81,7 +81,7 @@ model Answer {
   answeredAt    DateTime?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  question      Question  @relation(fields: [questionId], references: [id])
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
 }
 
 model Report {
@@ -91,7 +91,6 @@ model Report {
   interviewId         Int       @unique
   overallScore        Float?
   technicalScore      Float?
-  explanation         String?
   communicationScore  Float?
   confidenceScore     Float?
   problemSolvingScore Float?
@@ -101,7 +100,7 @@ model Report {
   overallFeedback     String?
   createdAt           DateTime  @default(now())
   updatedAt           DateTime  @updatedAt
-  interview           Interview @relation(fields: [interviewId], references: [id])
+  interview Interview @relation(fields: [interviewId], references: [id], onDelete: Cascade)
   user                User      @relation(fields: [userId], references: [id])
 
   @@index([userId])

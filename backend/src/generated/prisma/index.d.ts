@@ -7471,7 +7471,6 @@ export namespace Prisma {
     interviewId: number | null
     overallScore: number | null
     technicalScore: number | null
-    explanation: string | null
     communicationScore: number | null
     confidenceScore: number | null
     problemSolvingScore: number | null
@@ -7487,7 +7486,6 @@ export namespace Prisma {
     interviewId: number | null
     overallScore: number | null
     technicalScore: number | null
-    explanation: string | null
     communicationScore: number | null
     confidenceScore: number | null
     problemSolvingScore: number | null
@@ -7503,7 +7501,6 @@ export namespace Prisma {
     interviewId: number
     overallScore: number
     technicalScore: number
-    explanation: number
     communicationScore: number
     confidenceScore: number
     problemSolvingScore: number
@@ -7548,7 +7545,6 @@ export namespace Prisma {
     interviewId?: true
     overallScore?: true
     technicalScore?: true
-    explanation?: true
     communicationScore?: true
     confidenceScore?: true
     problemSolvingScore?: true
@@ -7564,7 +7560,6 @@ export namespace Prisma {
     interviewId?: true
     overallScore?: true
     technicalScore?: true
-    explanation?: true
     communicationScore?: true
     confidenceScore?: true
     problemSolvingScore?: true
@@ -7580,7 +7575,6 @@ export namespace Prisma {
     interviewId?: true
     overallScore?: true
     technicalScore?: true
-    explanation?: true
     communicationScore?: true
     confidenceScore?: true
     problemSolvingScore?: true
@@ -7686,7 +7680,6 @@ export namespace Prisma {
     interviewId: number
     overallScore: number | null
     technicalScore: number | null
-    explanation: string | null
     communicationScore: number | null
     confidenceScore: number | null
     problemSolvingScore: number | null
@@ -7724,7 +7717,6 @@ export namespace Prisma {
     interviewId?: boolean
     overallScore?: boolean
     technicalScore?: boolean
-    explanation?: boolean
     communicationScore?: boolean
     confidenceScore?: boolean
     problemSolvingScore?: boolean
@@ -7745,7 +7737,6 @@ export namespace Prisma {
     interviewId?: boolean
     overallScore?: boolean
     technicalScore?: boolean
-    explanation?: boolean
     communicationScore?: boolean
     confidenceScore?: boolean
     problemSolvingScore?: boolean
@@ -7766,7 +7757,6 @@ export namespace Prisma {
     interviewId?: boolean
     overallScore?: boolean
     technicalScore?: boolean
-    explanation?: boolean
     communicationScore?: boolean
     confidenceScore?: boolean
     problemSolvingScore?: boolean
@@ -7787,7 +7777,6 @@ export namespace Prisma {
     interviewId?: boolean
     overallScore?: boolean
     technicalScore?: boolean
-    explanation?: boolean
     communicationScore?: boolean
     confidenceScore?: boolean
     problemSolvingScore?: boolean
@@ -7799,7 +7788,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ReportOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "duration" | "interviewId" | "overallScore" | "technicalScore" | "explanation" | "communicationScore" | "confidenceScore" | "problemSolvingScore" | "strengths" | "weaknesses" | "improvementPlan" | "overallFeedback" | "createdAt" | "updatedAt", ExtArgs["result"]["report"]>
+  export type ReportOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "duration" | "interviewId" | "overallScore" | "technicalScore" | "communicationScore" | "confidenceScore" | "problemSolvingScore" | "strengths" | "weaknesses" | "improvementPlan" | "overallFeedback" | "createdAt" | "updatedAt", ExtArgs["result"]["report"]>
   export type ReportInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     interview?: boolean | InterviewDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -7826,7 +7815,6 @@ export namespace Prisma {
       interviewId: number
       overallScore: number | null
       technicalScore: number | null
-      explanation: string | null
       communicationScore: number | null
       confidenceScore: number | null
       problemSolvingScore: number | null
@@ -8267,7 +8255,6 @@ export namespace Prisma {
     readonly interviewId: FieldRef<"Report", 'Int'>
     readonly overallScore: FieldRef<"Report", 'Float'>
     readonly technicalScore: FieldRef<"Report", 'Float'>
-    readonly explanation: FieldRef<"Report", 'String'>
     readonly communicationScore: FieldRef<"Report", 'Float'>
     readonly confidenceScore: FieldRef<"Report", 'Float'>
     readonly problemSolvingScore: FieldRef<"Report", 'Float'>
@@ -8793,7 +8780,6 @@ export namespace Prisma {
     interviewId: 'interviewId',
     overallScore: 'overallScore',
     technicalScore: 'technicalScore',
-    explanation: 'explanation',
     communicationScore: 'communicationScore',
     confidenceScore: 'confidenceScore',
     problemSolvingScore: 'problemSolvingScore',
@@ -9376,7 +9362,6 @@ export namespace Prisma {
     interviewId?: IntFilter<"Report"> | number
     overallScore?: FloatNullableFilter<"Report"> | number | null
     technicalScore?: FloatNullableFilter<"Report"> | number | null
-    explanation?: StringNullableFilter<"Report"> | string | null
     communicationScore?: FloatNullableFilter<"Report"> | number | null
     confidenceScore?: FloatNullableFilter<"Report"> | number | null
     problemSolvingScore?: FloatNullableFilter<"Report"> | number | null
@@ -9397,7 +9382,6 @@ export namespace Prisma {
     interviewId?: SortOrder
     overallScore?: SortOrderInput | SortOrder
     technicalScore?: SortOrderInput | SortOrder
-    explanation?: SortOrderInput | SortOrder
     communicationScore?: SortOrderInput | SortOrder
     confidenceScore?: SortOrderInput | SortOrder
     problemSolvingScore?: SortOrderInput | SortOrder
@@ -9421,7 +9405,6 @@ export namespace Prisma {
     duration?: IntNullableFilter<"Report"> | number | null
     overallScore?: FloatNullableFilter<"Report"> | number | null
     technicalScore?: FloatNullableFilter<"Report"> | number | null
-    explanation?: StringNullableFilter<"Report"> | string | null
     communicationScore?: FloatNullableFilter<"Report"> | number | null
     confidenceScore?: FloatNullableFilter<"Report"> | number | null
     problemSolvingScore?: FloatNullableFilter<"Report"> | number | null
@@ -9442,7 +9425,6 @@ export namespace Prisma {
     interviewId?: SortOrder
     overallScore?: SortOrderInput | SortOrder
     technicalScore?: SortOrderInput | SortOrder
-    explanation?: SortOrderInput | SortOrder
     communicationScore?: SortOrderInput | SortOrder
     confidenceScore?: SortOrderInput | SortOrder
     problemSolvingScore?: SortOrderInput | SortOrder
@@ -9469,7 +9451,6 @@ export namespace Prisma {
     interviewId?: IntWithAggregatesFilter<"Report"> | number
     overallScore?: FloatNullableWithAggregatesFilter<"Report"> | number | null
     technicalScore?: FloatNullableWithAggregatesFilter<"Report"> | number | null
-    explanation?: StringNullableWithAggregatesFilter<"Report"> | string | null
     communicationScore?: FloatNullableWithAggregatesFilter<"Report"> | number | null
     confidenceScore?: FloatNullableWithAggregatesFilter<"Report"> | number | null
     problemSolvingScore?: FloatNullableWithAggregatesFilter<"Report"> | number | null
@@ -9920,7 +9901,6 @@ export namespace Prisma {
     duration?: number | null
     overallScore?: number | null
     technicalScore?: number | null
-    explanation?: string | null
     communicationScore?: number | null
     confidenceScore?: number | null
     problemSolvingScore?: number | null
@@ -9941,7 +9921,6 @@ export namespace Prisma {
     interviewId: number
     overallScore?: number | null
     technicalScore?: number | null
-    explanation?: string | null
     communicationScore?: number | null
     confidenceScore?: number | null
     problemSolvingScore?: number | null
@@ -9957,7 +9936,6 @@ export namespace Prisma {
     duration?: NullableIntFieldUpdateOperationsInput | number | null
     overallScore?: NullableFloatFieldUpdateOperationsInput | number | null
     technicalScore?: NullableFloatFieldUpdateOperationsInput | number | null
-    explanation?: NullableStringFieldUpdateOperationsInput | string | null
     communicationScore?: NullableFloatFieldUpdateOperationsInput | number | null
     confidenceScore?: NullableFloatFieldUpdateOperationsInput | number | null
     problemSolvingScore?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -9978,7 +9956,6 @@ export namespace Prisma {
     interviewId?: IntFieldUpdateOperationsInput | number
     overallScore?: NullableFloatFieldUpdateOperationsInput | number | null
     technicalScore?: NullableFloatFieldUpdateOperationsInput | number | null
-    explanation?: NullableStringFieldUpdateOperationsInput | string | null
     communicationScore?: NullableFloatFieldUpdateOperationsInput | number | null
     confidenceScore?: NullableFloatFieldUpdateOperationsInput | number | null
     problemSolvingScore?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -9997,7 +9974,6 @@ export namespace Prisma {
     interviewId: number
     overallScore?: number | null
     technicalScore?: number | null
-    explanation?: string | null
     communicationScore?: number | null
     confidenceScore?: number | null
     problemSolvingScore?: number | null
@@ -10013,7 +9989,6 @@ export namespace Prisma {
     duration?: NullableIntFieldUpdateOperationsInput | number | null
     overallScore?: NullableFloatFieldUpdateOperationsInput | number | null
     technicalScore?: NullableFloatFieldUpdateOperationsInput | number | null
-    explanation?: NullableStringFieldUpdateOperationsInput | string | null
     communicationScore?: NullableFloatFieldUpdateOperationsInput | number | null
     confidenceScore?: NullableFloatFieldUpdateOperationsInput | number | null
     problemSolvingScore?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -10032,7 +10007,6 @@ export namespace Prisma {
     interviewId?: IntFieldUpdateOperationsInput | number
     overallScore?: NullableFloatFieldUpdateOperationsInput | number | null
     technicalScore?: NullableFloatFieldUpdateOperationsInput | number | null
-    explanation?: NullableStringFieldUpdateOperationsInput | string | null
     communicationScore?: NullableFloatFieldUpdateOperationsInput | number | null
     confidenceScore?: NullableFloatFieldUpdateOperationsInput | number | null
     problemSolvingScore?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -10641,7 +10615,6 @@ export namespace Prisma {
     interviewId?: SortOrder
     overallScore?: SortOrder
     technicalScore?: SortOrder
-    explanation?: SortOrder
     communicationScore?: SortOrder
     confidenceScore?: SortOrder
     problemSolvingScore?: SortOrder
@@ -10672,7 +10645,6 @@ export namespace Prisma {
     interviewId?: SortOrder
     overallScore?: SortOrder
     technicalScore?: SortOrder
-    explanation?: SortOrder
     communicationScore?: SortOrder
     confidenceScore?: SortOrder
     problemSolvingScore?: SortOrder
@@ -10688,7 +10660,6 @@ export namespace Prisma {
     interviewId?: SortOrder
     overallScore?: SortOrder
     technicalScore?: SortOrder
-    explanation?: SortOrder
     communicationScore?: SortOrder
     confidenceScore?: SortOrder
     problemSolvingScore?: SortOrder
@@ -11433,7 +11404,6 @@ export namespace Prisma {
     duration?: number | null
     overallScore?: number | null
     technicalScore?: number | null
-    explanation?: string | null
     communicationScore?: number | null
     confidenceScore?: number | null
     problemSolvingScore?: number | null
@@ -11452,7 +11422,6 @@ export namespace Prisma {
     interviewId: number
     overallScore?: number | null
     technicalScore?: number | null
-    explanation?: string | null
     communicationScore?: number | null
     confidenceScore?: number | null
     problemSolvingScore?: number | null
@@ -11566,7 +11535,6 @@ export namespace Prisma {
     interviewId?: IntFilter<"Report"> | number
     overallScore?: FloatNullableFilter<"Report"> | number | null
     technicalScore?: FloatNullableFilter<"Report"> | number | null
-    explanation?: StringNullableFilter<"Report"> | string | null
     communicationScore?: FloatNullableFilter<"Report"> | number | null
     confidenceScore?: FloatNullableFilter<"Report"> | number | null
     problemSolvingScore?: FloatNullableFilter<"Report"> | number | null
@@ -11809,7 +11777,6 @@ export namespace Prisma {
     duration?: number | null
     overallScore?: number | null
     technicalScore?: number | null
-    explanation?: string | null
     communicationScore?: number | null
     confidenceScore?: number | null
     problemSolvingScore?: number | null
@@ -11828,7 +11795,6 @@ export namespace Prisma {
     duration?: number | null
     overallScore?: number | null
     technicalScore?: number | null
-    explanation?: string | null
     communicationScore?: number | null
     confidenceScore?: number | null
     problemSolvingScore?: number | null
@@ -11955,7 +11921,6 @@ export namespace Prisma {
     duration?: NullableIntFieldUpdateOperationsInput | number | null
     overallScore?: NullableFloatFieldUpdateOperationsInput | number | null
     technicalScore?: NullableFloatFieldUpdateOperationsInput | number | null
-    explanation?: NullableStringFieldUpdateOperationsInput | string | null
     communicationScore?: NullableFloatFieldUpdateOperationsInput | number | null
     confidenceScore?: NullableFloatFieldUpdateOperationsInput | number | null
     problemSolvingScore?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -11974,7 +11939,6 @@ export namespace Prisma {
     duration?: NullableIntFieldUpdateOperationsInput | number | null
     overallScore?: NullableFloatFieldUpdateOperationsInput | number | null
     technicalScore?: NullableFloatFieldUpdateOperationsInput | number | null
-    explanation?: NullableStringFieldUpdateOperationsInput | string | null
     communicationScore?: NullableFloatFieldUpdateOperationsInput | number | null
     confidenceScore?: NullableFloatFieldUpdateOperationsInput | number | null
     problemSolvingScore?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -12339,7 +12303,6 @@ export namespace Prisma {
     interviewId: number
     overallScore?: number | null
     technicalScore?: number | null
-    explanation?: string | null
     communicationScore?: number | null
     confidenceScore?: number | null
     problemSolvingScore?: number | null
@@ -12408,7 +12371,6 @@ export namespace Prisma {
     duration?: NullableIntFieldUpdateOperationsInput | number | null
     overallScore?: NullableFloatFieldUpdateOperationsInput | number | null
     technicalScore?: NullableFloatFieldUpdateOperationsInput | number | null
-    explanation?: NullableStringFieldUpdateOperationsInput | string | null
     communicationScore?: NullableFloatFieldUpdateOperationsInput | number | null
     confidenceScore?: NullableFloatFieldUpdateOperationsInput | number | null
     problemSolvingScore?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -12427,7 +12389,6 @@ export namespace Prisma {
     interviewId?: IntFieldUpdateOperationsInput | number
     overallScore?: NullableFloatFieldUpdateOperationsInput | number | null
     technicalScore?: NullableFloatFieldUpdateOperationsInput | number | null
-    explanation?: NullableStringFieldUpdateOperationsInput | string | null
     communicationScore?: NullableFloatFieldUpdateOperationsInput | number | null
     confidenceScore?: NullableFloatFieldUpdateOperationsInput | number | null
     problemSolvingScore?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -12445,7 +12406,6 @@ export namespace Prisma {
     interviewId?: IntFieldUpdateOperationsInput | number
     overallScore?: NullableFloatFieldUpdateOperationsInput | number | null
     technicalScore?: NullableFloatFieldUpdateOperationsInput | number | null
-    explanation?: NullableStringFieldUpdateOperationsInput | string | null
     communicationScore?: NullableFloatFieldUpdateOperationsInput | number | null
     confidenceScore?: NullableFloatFieldUpdateOperationsInput | number | null
     problemSolvingScore?: NullableFloatFieldUpdateOperationsInput | number | null

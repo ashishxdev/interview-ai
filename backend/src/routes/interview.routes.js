@@ -1,6 +1,6 @@
 import express from "express";
 import { authenticate } from "../middleware/auth.middleware.js"
-import { createInterview, getInterviewQuestions, submitAnswer } from "../controllers/interview.controller.js";
+import { createInterview, getInterviewQuestions, submitAnswer, getInterviewReport, getInterviewHistory, deleteInterview } from "../controllers/interview.controller.js";
 
 const router = express.Router();
 
@@ -15,5 +15,12 @@ router.post(
     authenticate,
     submitAnswer
 );
+router.get(
+    "/:interviewId/report",
+    authenticate,
+    getInterviewReport
+);
+router.get("/", authenticate, getInterviewHistory);
+router.delete("/:interviewId", authenticate, deleteInterview);
 
 export default router;
