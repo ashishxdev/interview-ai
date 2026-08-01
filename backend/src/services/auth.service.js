@@ -66,7 +66,6 @@ export const loginUser = async (data) => {
         user: {
             id: existingUser.id,
             name: existingUser.name,
-            password: existingUser.password,
             createdAt: existingUser.createdAt
         },
         token,
