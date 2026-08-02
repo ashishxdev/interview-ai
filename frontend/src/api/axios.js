@@ -1,5 +1,6 @@
 import axios from "axios";
 import { getToken } from "../services/token";
+import { removeToken } from "../services/token";
 
 const api = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
@@ -17,5 +18,20 @@ api.interceptors.request.use((config) => {
 
     return config;
 })
+
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response?.status === 401) {
+            removeToken();
+
+            if (!window.location.pathname.includes("/login")) {
+                window.location.assign("/login");
+            }
+        }
+
+        return Promise.reject(error);
+    }
+);
 
 export default api;

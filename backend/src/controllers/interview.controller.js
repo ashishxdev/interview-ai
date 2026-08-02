@@ -39,6 +39,9 @@ export const getInterviewQuestions = async (req, res) => {
             where: {
                 interviewId: interviewIdNumber,
             },
+            include: {
+                answer: true,
+            },
             orderBy: {
                 questionNumber: "asc",
             },
@@ -107,6 +110,8 @@ export const createInterview = async (req, res) => {
                 resumeId: resume.id,
                 title,
                 difficulty,
+                status: InterviewStatus.STARTED,
+                startedAt: new Date(),
                 resumeSnapshot: resume.parsedData,
             },
         });
@@ -126,7 +131,7 @@ export const createInterview = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        return res.status(500).json({
+        return res.status(err.statusCode || 500).json({
             success: false,
             message: err.message,
         });
@@ -283,7 +288,7 @@ export const submitAnswer = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        return res.status(500).json({
+        return res.status(err.statusCode || 500).json({
             success: false,
             message: err.message,
         });
@@ -400,7 +405,7 @@ export const getInterviewReport = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        return res.status(500).json({
+        return res.status(err.statusCode || 500).json({
             success: false,
             message: err.message,
         });
@@ -443,7 +448,7 @@ export const getInterviewHistory = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        return res.status(500).json({
+        return res.status(err.statusCode || 500).json({
             success: false,
             message: err.message,
         });
@@ -516,7 +521,7 @@ export const deleteInterview = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        return res.status(500).json({
+        return res.status(err.statusCode || 500).json({
             success: false,
             message: err.message,
         });

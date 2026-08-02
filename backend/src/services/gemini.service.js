@@ -4,6 +4,51 @@ const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
 })
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const isGeminiUnavailableError = (error) => {
+    const status = error?.status ?? error?.response?.status ?? error?.error?.code;
+    const code = error?.code;
+    const message = String(error?.message || error?.error?.message || "");
+
+    return (
+        status === 503 ||
+        status === "UNAVAILABLE" ||
+        code === 503 ||
+        code === "UNAVAILABLE" ||
+        message.includes("UNAVAILABLE") ||
+        message.includes("high demand")
+    );
+};
+
+const generateContentWithRetry = async (prompt, model, retries = 2) => {
+    let lastError;
+
+    for (let attempt = 0; attempt <= retries; attempt += 1) {
+        try {
+            return await ai.models.generateContent({
+                model,
+                contents: prompt,
+            });
+        } catch (error) {
+            lastError = error;
+
+            if (!isGeminiUnavailableError(error) || attempt === retries) {
+                break;
+            }
+
+            await sleep(500 * (attempt + 1));
+        }
+    }
+
+    const unavailableError = new Error(
+        "AI service is temporarily unavailable. Please try again in a moment."
+    );
+    unavailableError.statusCode = 503;
+    unavailableError.cause = lastError;
+    throw unavailableError;
+};
+
 export const parseResumeWithGemini = async (resumeText) => {
 
     const prompt = `
@@ -79,10 +124,7 @@ export const parseResumeWithGemini = async (resumeText) => {
     ${resumeText}
     `;
 
-    const response = await ai.models.generateContent({
-        model: "gemini-3.6-flash",
-        contents: prompt,
-    });
+    const response = await generateContentWithRetry(prompt, "gemini-3.6-flash");
 
     const cleanedText = response.text
         .replace(/```json/g, "")
@@ -124,10 +166,7 @@ export const evaluateAnswerWithGemini = async (question, answer) => {
     }
     `;
 
-    const response = await ai.models.generateContent({
-        model: "gemini-3.6-flash",
-        contents: prompt,
-    });
+    const response = await generateContentWithRetry(prompt, "gemini-3.6-flash");
 
     const cleanedText = response.text
         .replace(/```json/g, "")
@@ -192,10 +231,7 @@ JSON Structure:
 ]
 `;
 
-    const response = await ai.models.generateContent({
-        model: "gemini-3.6-flash",
-        contents: prompt,
-    });
+    const response = await generateContentWithRetry(prompt, "gemini-3.6-flash");
 
     const cleanedText = response.text
         .replace(/```json/g, "")

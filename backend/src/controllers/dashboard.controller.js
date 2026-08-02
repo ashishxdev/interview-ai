@@ -26,7 +26,11 @@ export const getDashboardStats = async (req, res) => {
         ).length;
 
         const inProgressInterviews = interviews.filter(
-            interview => interview.status === "IN_PROGRESS"
+            interview => interview.status === "STARTED"
+        ).length;
+
+        const pendingInterviews = interviews.filter(
+            interview => interview.status === "PENDING"
         ).length;
 
         const completedWithReports = interviews.filter(
@@ -62,6 +66,7 @@ export const getDashboardStats = async (req, res) => {
             stats: {
                 totalInterviews,
                 completedInterviews,
+                pendingInterviews,
                 inProgressInterviews,
                 averageScore,
                 latestInterview,
