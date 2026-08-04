@@ -47,6 +47,10 @@ function InterviewSession() {
 
     const { supported: ttsSupported, speaking, speak, cancel } = useTextToSpeech();
     const spokenQuestionRef = useRef(null);
+    // Track how long the candidate spends on the current question, and the
+    // speech-to-text transcript for it, so both can be persisted on submit.
+    const questionStartRef = useRef(null);
+    const spokenTranscriptRef = useRef("");
 
     const {
         supported: sttSupported,
@@ -56,9 +60,14 @@ function InterviewSession() {
         start: startListening,
         stop: stopListening,
     } = useSpeechToText({
-        // Append each finalized speech chunk to the answer (works alongside typing).
-        onFinalTranscript: (chunk) =>
-            setAnswer((prev) => (prev ? `${prev} ${chunk}` : chunk)),
+        // Append each finalized speech chunk to the answer (works alongside typing)
+        // and keep a separate copy as the raw transcript for this question.
+        onFinalTranscript: (chunk) => {
+            setAnswer((prev) => (prev ? `${prev} ${chunk}` : chunk));
+            spokenTranscriptRef.current = spokenTranscriptRef.current
+                ? `${spokenTranscriptRef.current} ${chunk}`
+                : chunk;
+        },
         // Auto-stop the mic after 4s of silence, so users don't have to click "Stop".
         silenceTimeout: 4000,
     });
@@ -83,12 +92,15 @@ function InterviewSession() {
         dismissViolation,
     } = useProctoring({ active: isAnswering });
 
-    // Auto-read each new question aloud once, but not questions already answered.
+    // Auto-read each new question aloud once (not already-answered ones), and
+    // reset the per-question timer + transcript when the question changes.
     useEffect(() => {
         if (!currentQuestion || currentQuestion.answer) return;
         if (spokenQuestionRef.current === currentQuestion.id) return;
 
         spokenQuestionRef.current = currentQuestion.id;
+        questionStartRef.current = Date.now();
+        spokenTranscriptRef.current = "";
         speak(currentQuestion.question);
     }, [currentQuestion, speak]);
 
@@ -101,11 +113,17 @@ function InterviewSession() {
     const submitAnswer = () => {
         stopListening();
 
+        const startedAt = questionStartRef.current;
+        const timeTaken = startedAt ? Math.max(0, Math.round((Date.now() - startedAt) / 1000)) : undefined;
+        const transcript = spokenTranscriptRef.current || undefined;
+
         submitMutation.mutate(
             {
                 interviewId,
                 questionId: currentQuestion.id,
                 answer,
+                timeTaken,
+                transcript,
             },
             {
                 onSuccess: () => {

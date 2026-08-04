@@ -141,7 +141,7 @@ export const createInterview = async (req, res) => {
 export const submitAnswer = async (req, res) => {
     try {
         const { interviewId } = req.params;
-        const { questionId, answer } = req.body;
+        const { questionId, answer, timeTaken, transcript } = req.body;
 
         if (!questionId || typeof answer !== "string" || !answer.trim()) {
             return res.status(400).json({
@@ -245,6 +245,14 @@ export const submitAnswer = async (req, res) => {
                 idealAnswer: evaluation.idealAnswer,
                 missingPoints: evaluation.missingPoints,
                 answeredAt: new Date(),
+                timeTaken:
+                    Number.isFinite(timeTaken) && timeTaken >= 0
+                        ? Math.trunc(timeTaken)
+                        : null,
+                transcript:
+                    typeof transcript === "string" && transcript.trim()
+                        ? transcript.trim()
+                        : null,
             },
         });
 
