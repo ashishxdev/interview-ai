@@ -45,6 +45,8 @@ model Interview {
   status         InterviewStatus @default(PENDING)
   startedAt      DateTime?
   endedAt        DateTime?
+  tabSwitchCount   Int           @default(0)
+  fullscreenExits  Int           @default(0)
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
   resume         Resume          @relation(fields: [resumeId], references: [id])

@@ -10,12 +10,14 @@ export const getInterviewQuestions = async (interviewId) => {
     return response.data;
 };
 
-export const submitInterviewAnswer = async ({ interviewId, questionId, answer, timeTaken, transcript }) => {
+export const submitInterviewAnswer = async ({ interviewId, questionId, answer, timeTaken, transcript, tabSwitchCount, fullscreenExits }) => {
     const response = await api.post(`/interview/${interviewId}/answer`, {
         questionId,
         answer,
         timeTaken,
         transcript,
+        tabSwitchCount,
+        fullscreenExits,
     });
     return response.data;
 };

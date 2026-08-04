@@ -3837,12 +3837,16 @@ export namespace Prisma {
     id: number | null
     userId: number | null
     resumeId: number | null
+    tabSwitchCount: number | null
+    fullscreenExits: number | null
   }
 
   export type InterviewSumAggregateOutputType = {
     id: number | null
     userId: number | null
     resumeId: number | null
+    tabSwitchCount: number | null
+    fullscreenExits: number | null
   }
 
   export type InterviewMinAggregateOutputType = {
@@ -3854,6 +3858,8 @@ export namespace Prisma {
     status: $Enums.InterviewStatus | null
     startedAt: Date | null
     endedAt: Date | null
+    tabSwitchCount: number | null
+    fullscreenExits: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3867,6 +3873,8 @@ export namespace Prisma {
     status: $Enums.InterviewStatus | null
     startedAt: Date | null
     endedAt: Date | null
+    tabSwitchCount: number | null
+    fullscreenExits: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3881,6 +3889,8 @@ export namespace Prisma {
     status: number
     startedAt: number
     endedAt: number
+    tabSwitchCount: number
+    fullscreenExits: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -3891,12 +3901,16 @@ export namespace Prisma {
     id?: true
     userId?: true
     resumeId?: true
+    tabSwitchCount?: true
+    fullscreenExits?: true
   }
 
   export type InterviewSumAggregateInputType = {
     id?: true
     userId?: true
     resumeId?: true
+    tabSwitchCount?: true
+    fullscreenExits?: true
   }
 
   export type InterviewMinAggregateInputType = {
@@ -3908,6 +3922,8 @@ export namespace Prisma {
     status?: true
     startedAt?: true
     endedAt?: true
+    tabSwitchCount?: true
+    fullscreenExits?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3921,6 +3937,8 @@ export namespace Prisma {
     status?: true
     startedAt?: true
     endedAt?: true
+    tabSwitchCount?: true
+    fullscreenExits?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3935,6 +3953,8 @@ export namespace Prisma {
     status?: true
     startedAt?: true
     endedAt?: true
+    tabSwitchCount?: true
+    fullscreenExits?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -4036,6 +4056,8 @@ export namespace Prisma {
     status: $Enums.InterviewStatus
     startedAt: Date | null
     endedAt: Date | null
+    tabSwitchCount: number
+    fullscreenExits: number
     createdAt: Date
     updatedAt: Date
     _count: InterviewCountAggregateOutputType | null
@@ -4069,6 +4091,8 @@ export namespace Prisma {
     status?: boolean
     startedAt?: boolean
     endedAt?: boolean
+    tabSwitchCount?: boolean
+    fullscreenExits?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     resume?: boolean | ResumeDefaultArgs<ExtArgs>
@@ -4088,6 +4112,8 @@ export namespace Prisma {
     status?: boolean
     startedAt?: boolean
     endedAt?: boolean
+    tabSwitchCount?: boolean
+    fullscreenExits?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     resume?: boolean | ResumeDefaultArgs<ExtArgs>
@@ -4104,6 +4130,8 @@ export namespace Prisma {
     status?: boolean
     startedAt?: boolean
     endedAt?: boolean
+    tabSwitchCount?: boolean
+    fullscreenExits?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     resume?: boolean | ResumeDefaultArgs<ExtArgs>
@@ -4120,11 +4148,13 @@ export namespace Prisma {
     status?: boolean
     startedAt?: boolean
     endedAt?: boolean
+    tabSwitchCount?: boolean
+    fullscreenExits?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type InterviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "resumeSnapshot" | "resumeId" | "difficulty" | "status" | "startedAt" | "endedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["interview"]>
+  export type InterviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "resumeSnapshot" | "resumeId" | "difficulty" | "status" | "startedAt" | "endedAt" | "tabSwitchCount" | "fullscreenExits" | "createdAt" | "updatedAt", ExtArgs["result"]["interview"]>
   export type InterviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     resume?: boolean | ResumeDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -4159,6 +4189,8 @@ export namespace Prisma {
       status: $Enums.InterviewStatus
       startedAt: Date | null
       endedAt: Date | null
+      tabSwitchCount: number
+      fullscreenExits: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["interview"]>
@@ -4597,6 +4629,8 @@ export namespace Prisma {
     readonly status: FieldRef<"Interview", 'InterviewStatus'>
     readonly startedAt: FieldRef<"Interview", 'DateTime'>
     readonly endedAt: FieldRef<"Interview", 'DateTime'>
+    readonly tabSwitchCount: FieldRef<"Interview", 'Int'>
+    readonly fullscreenExits: FieldRef<"Interview", 'Int'>
     readonly createdAt: FieldRef<"Interview", 'DateTime'>
     readonly updatedAt: FieldRef<"Interview", 'DateTime'>
   }
@@ -8734,6 +8768,8 @@ export namespace Prisma {
     status: 'status',
     startedAt: 'startedAt',
     endedAt: 'endedAt',
+    tabSwitchCount: 'tabSwitchCount',
+    fullscreenExits: 'fullscreenExits',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -9102,6 +9138,8 @@ export namespace Prisma {
     status?: EnumInterviewStatusFilter<"Interview"> | $Enums.InterviewStatus
     startedAt?: DateTimeNullableFilter<"Interview"> | Date | string | null
     endedAt?: DateTimeNullableFilter<"Interview"> | Date | string | null
+    tabSwitchCount?: IntFilter<"Interview"> | number
+    fullscreenExits?: IntFilter<"Interview"> | number
     createdAt?: DateTimeFilter<"Interview"> | Date | string
     updatedAt?: DateTimeFilter<"Interview"> | Date | string
     resume?: XOR<ResumeScalarRelationFilter, ResumeWhereInput>
@@ -9120,6 +9158,8 @@ export namespace Prisma {
     status?: SortOrder
     startedAt?: SortOrderInput | SortOrder
     endedAt?: SortOrderInput | SortOrder
+    tabSwitchCount?: SortOrder
+    fullscreenExits?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     resume?: ResumeOrderByWithRelationInput
@@ -9141,6 +9181,8 @@ export namespace Prisma {
     status?: EnumInterviewStatusFilter<"Interview"> | $Enums.InterviewStatus
     startedAt?: DateTimeNullableFilter<"Interview"> | Date | string | null
     endedAt?: DateTimeNullableFilter<"Interview"> | Date | string | null
+    tabSwitchCount?: IntFilter<"Interview"> | number
+    fullscreenExits?: IntFilter<"Interview"> | number
     createdAt?: DateTimeFilter<"Interview"> | Date | string
     updatedAt?: DateTimeFilter<"Interview"> | Date | string
     resume?: XOR<ResumeScalarRelationFilter, ResumeWhereInput>
@@ -9159,6 +9201,8 @@ export namespace Prisma {
     status?: SortOrder
     startedAt?: SortOrderInput | SortOrder
     endedAt?: SortOrderInput | SortOrder
+    tabSwitchCount?: SortOrder
+    fullscreenExits?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: InterviewCountOrderByAggregateInput
@@ -9181,6 +9225,8 @@ export namespace Prisma {
     status?: EnumInterviewStatusWithAggregatesFilter<"Interview"> | $Enums.InterviewStatus
     startedAt?: DateTimeNullableWithAggregatesFilter<"Interview"> | Date | string | null
     endedAt?: DateTimeNullableWithAggregatesFilter<"Interview"> | Date | string | null
+    tabSwitchCount?: IntWithAggregatesFilter<"Interview"> | number
+    fullscreenExits?: IntWithAggregatesFilter<"Interview"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Interview"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Interview"> | Date | string
   }
@@ -9625,6 +9671,8 @@ export namespace Prisma {
     status?: $Enums.InterviewStatus
     startedAt?: Date | string | null
     endedAt?: Date | string | null
+    tabSwitchCount?: number
+    fullscreenExits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     resume: ResumeCreateNestedOneWithoutInterviewsInput
@@ -9643,6 +9691,8 @@ export namespace Prisma {
     status?: $Enums.InterviewStatus
     startedAt?: Date | string | null
     endedAt?: Date | string | null
+    tabSwitchCount?: number
+    fullscreenExits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutInterviewInput
@@ -9656,6 +9706,8 @@ export namespace Prisma {
     status?: EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tabSwitchCount?: IntFieldUpdateOperationsInput | number
+    fullscreenExits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resume?: ResumeUpdateOneRequiredWithoutInterviewsNestedInput
@@ -9674,6 +9726,8 @@ export namespace Prisma {
     status?: EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tabSwitchCount?: IntFieldUpdateOperationsInput | number
+    fullscreenExits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutInterviewNestedInput
@@ -9690,6 +9744,8 @@ export namespace Prisma {
     status?: $Enums.InterviewStatus
     startedAt?: Date | string | null
     endedAt?: Date | string | null
+    tabSwitchCount?: number
+    fullscreenExits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9701,6 +9757,8 @@ export namespace Prisma {
     status?: EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tabSwitchCount?: IntFieldUpdateOperationsInput | number
+    fullscreenExits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9715,6 +9773,8 @@ export namespace Prisma {
     status?: EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tabSwitchCount?: IntFieldUpdateOperationsInput | number
+    fullscreenExits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10359,6 +10419,8 @@ export namespace Prisma {
     status?: SortOrder
     startedAt?: SortOrder
     endedAt?: SortOrder
+    tabSwitchCount?: SortOrder
+    fullscreenExits?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -10367,6 +10429,8 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     resumeId?: SortOrder
+    tabSwitchCount?: SortOrder
+    fullscreenExits?: SortOrder
   }
 
   export type InterviewMaxOrderByAggregateInput = {
@@ -10378,6 +10442,8 @@ export namespace Prisma {
     status?: SortOrder
     startedAt?: SortOrder
     endedAt?: SortOrder
+    tabSwitchCount?: SortOrder
+    fullscreenExits?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -10391,6 +10457,8 @@ export namespace Prisma {
     status?: SortOrder
     startedAt?: SortOrder
     endedAt?: SortOrder
+    tabSwitchCount?: SortOrder
+    fullscreenExits?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -10399,6 +10467,8 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     resumeId?: SortOrder
+    tabSwitchCount?: SortOrder
+    fullscreenExits?: SortOrder
   }
 
   export type EnumDifficultyWithAggregatesFilter<$PrismaModel = never> = {
@@ -11368,6 +11438,8 @@ export namespace Prisma {
     status?: $Enums.InterviewStatus
     startedAt?: Date | string | null
     endedAt?: Date | string | null
+    tabSwitchCount?: number
+    fullscreenExits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     resume: ResumeCreateNestedOneWithoutInterviewsInput
@@ -11384,6 +11456,8 @@ export namespace Prisma {
     status?: $Enums.InterviewStatus
     startedAt?: Date | string | null
     endedAt?: Date | string | null
+    tabSwitchCount?: number
+    fullscreenExits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutInterviewInput
@@ -11505,6 +11579,8 @@ export namespace Prisma {
     status?: EnumInterviewStatusFilter<"Interview"> | $Enums.InterviewStatus
     startedAt?: DateTimeNullableFilter<"Interview"> | Date | string | null
     endedAt?: DateTimeNullableFilter<"Interview"> | Date | string | null
+    tabSwitchCount?: IntFilter<"Interview"> | number
+    fullscreenExits?: IntFilter<"Interview"> | number
     createdAt?: DateTimeFilter<"Interview"> | Date | string
     updatedAt?: DateTimeFilter<"Interview"> | Date | string
   }
@@ -11584,6 +11660,8 @@ export namespace Prisma {
     status?: $Enums.InterviewStatus
     startedAt?: Date | string | null
     endedAt?: Date | string | null
+    tabSwitchCount?: number
+    fullscreenExits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutInterviewsInput
@@ -11600,6 +11678,8 @@ export namespace Prisma {
     status?: $Enums.InterviewStatus
     startedAt?: Date | string | null
     endedAt?: Date | string | null
+    tabSwitchCount?: number
+    fullscreenExits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutInterviewInput
@@ -11991,6 +12071,8 @@ export namespace Prisma {
     status?: $Enums.InterviewStatus
     startedAt?: Date | string | null
     endedAt?: Date | string | null
+    tabSwitchCount?: number
+    fullscreenExits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     resume: ResumeCreateNestedOneWithoutInterviewsInput
@@ -12008,6 +12090,8 @@ export namespace Prisma {
     status?: $Enums.InterviewStatus
     startedAt?: Date | string | null
     endedAt?: Date | string | null
+    tabSwitchCount?: number
+    fullscreenExits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     report?: ReportUncheckedCreateNestedOneWithoutInterviewInput
@@ -12076,6 +12160,8 @@ export namespace Prisma {
     status?: EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tabSwitchCount?: IntFieldUpdateOperationsInput | number
+    fullscreenExits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resume?: ResumeUpdateOneRequiredWithoutInterviewsNestedInput
@@ -12093,6 +12179,8 @@ export namespace Prisma {
     status?: EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tabSwitchCount?: IntFieldUpdateOperationsInput | number
+    fullscreenExits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     report?: ReportUncheckedUpdateOneWithoutInterviewNestedInput
@@ -12159,6 +12247,8 @@ export namespace Prisma {
     status?: $Enums.InterviewStatus
     startedAt?: Date | string | null
     endedAt?: Date | string | null
+    tabSwitchCount?: number
+    fullscreenExits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     resume: ResumeCreateNestedOneWithoutInterviewsInput
@@ -12176,6 +12266,8 @@ export namespace Prisma {
     status?: $Enums.InterviewStatus
     startedAt?: Date | string | null
     endedAt?: Date | string | null
+    tabSwitchCount?: number
+    fullscreenExits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutInterviewInput
@@ -12230,6 +12322,8 @@ export namespace Prisma {
     status?: EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tabSwitchCount?: IntFieldUpdateOperationsInput | number
+    fullscreenExits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resume?: ResumeUpdateOneRequiredWithoutInterviewsNestedInput
@@ -12247,6 +12341,8 @@ export namespace Prisma {
     status?: EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tabSwitchCount?: IntFieldUpdateOperationsInput | number
+    fullscreenExits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutInterviewNestedInput
@@ -12293,6 +12389,8 @@ export namespace Prisma {
     status?: $Enums.InterviewStatus
     startedAt?: Date | string | null
     endedAt?: Date | string | null
+    tabSwitchCount?: number
+    fullscreenExits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12332,6 +12430,8 @@ export namespace Prisma {
     status?: EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tabSwitchCount?: IntFieldUpdateOperationsInput | number
+    fullscreenExits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resume?: ResumeUpdateOneRequiredWithoutInterviewsNestedInput
@@ -12348,6 +12448,8 @@ export namespace Prisma {
     status?: EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tabSwitchCount?: IntFieldUpdateOperationsInput | number
+    fullscreenExits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutInterviewNestedInput
@@ -12363,6 +12465,8 @@ export namespace Prisma {
     status?: EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tabSwitchCount?: IntFieldUpdateOperationsInput | number
+    fullscreenExits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12460,6 +12564,8 @@ export namespace Prisma {
     status?: $Enums.InterviewStatus
     startedAt?: Date | string | null
     endedAt?: Date | string | null
+    tabSwitchCount?: number
+    fullscreenExits?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12471,6 +12577,8 @@ export namespace Prisma {
     status?: EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tabSwitchCount?: IntFieldUpdateOperationsInput | number
+    fullscreenExits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutInterviewsNestedInput
@@ -12487,6 +12595,8 @@ export namespace Prisma {
     status?: EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tabSwitchCount?: IntFieldUpdateOperationsInput | number
+    fullscreenExits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutInterviewNestedInput
@@ -12502,6 +12612,8 @@ export namespace Prisma {
     status?: EnumInterviewStatusFieldUpdateOperationsInput | $Enums.InterviewStatus
     startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     endedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tabSwitchCount?: IntFieldUpdateOperationsInput | number
+    fullscreenExits?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

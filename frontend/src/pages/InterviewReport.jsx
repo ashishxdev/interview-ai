@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { AlertCircle, ArrowLeft, RefreshCw } from "lucide-react";
+import { AlertCircle, ArrowLeft, RefreshCw, ShieldAlert, ShieldCheck } from "lucide-react";
 
 import AppLayout from "../components/AppLayout";
 import { useInterviewReport } from "../features/interview/interviewHooks";
@@ -51,6 +51,7 @@ function InterviewReport() {
     const { interviewId } = useParams();
     const reportQuery = useInterviewReport(interviewId);
     const report = reportQuery.data?.report;
+    const integrity = reportQuery.data?.integrity;
 
     return (
         <AppLayout>
@@ -107,6 +108,48 @@ function InterviewReport() {
                             {report.overallFeedback || "No feedback available."}
                         </p>
                     </section>
+
+                    {integrity && (
+                        (() => {
+                            const flags = (integrity.tabSwitchCount ?? 0) + (integrity.fullscreenExits ?? 0);
+                            const clean = flags === 0;
+                            return (
+                                <section
+                                    className={`rounded-lg border p-5 shadow-sm ${
+                                        clean ? "border-emerald-200 bg-emerald-50" : "border-amber-200 bg-amber-50"
+                                    }`}
+                                >
+                                    <div className="flex items-start gap-3">
+                                        {clean ? (
+                                            <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
+                                        ) : (
+                                            <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
+                                        )}
+                                        <div>
+                                            <h2 className={`text-lg font-semibold ${clean ? "text-emerald-900" : "text-amber-900"}`}>
+                                                Interview integrity
+                                            </h2>
+                                            <p className={`mt-1 text-sm ${clean ? "text-emerald-700" : "text-amber-700"}`}>
+                                                {clean
+                                                    ? "No proctoring flags — the candidate stayed focused throughout."
+                                                    : `${flags} proctoring ${flags === 1 ? "flag" : "flags"} recorded during this interview.`}
+                                            </p>
+                                            {!clean && (
+                                                <ul className="mt-3 flex flex-wrap gap-2 text-xs font-medium text-amber-800">
+                                                    <li className="rounded-full bg-white/70 px-3 py-1 ring-1 ring-amber-200">
+                                                        Tab switches: {integrity.tabSwitchCount ?? 0}
+                                                    </li>
+                                                    <li className="rounded-full bg-white/70 px-3 py-1 ring-1 ring-amber-200">
+                                                        Fullscreen exits: {integrity.fullscreenExits ?? 0}
+                                                    </li>
+                                                </ul>
+                                            )}
+                                        </div>
+                                    </div>
+                                </section>
+                            );
+                        })()
+                    )}
 
                     <div className="grid gap-4 lg:grid-cols-3">
                         <ListCard title="Strengths" items={report.strengths} />

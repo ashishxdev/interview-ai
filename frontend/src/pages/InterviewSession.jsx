@@ -86,6 +86,7 @@ function InterviewSession() {
     const {
         isFullscreen,
         tabSwitchCount,
+        fullscreenExitCount,
         violationCount,
         lastViolation,
         enterFullscreen,
@@ -124,6 +125,8 @@ function InterviewSession() {
                 answer,
                 timeTaken,
                 transcript,
+                tabSwitchCount,
+                fullscreenExits: fullscreenExitCount,
             },
             {
                 onSuccess: () => {

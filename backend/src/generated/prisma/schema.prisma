@@ -36,21 +36,23 @@ model Resume {
 }
 
 model Interview {
-  id             Int             @id @default(autoincrement())
-  userId         Int
-  title          String?
-  resumeSnapshot Json?
-  resumeId       Int
-  difficulty     Difficulty      @default(MEDIUM)
-  status         InterviewStatus @default(PENDING)
-  startedAt      DateTime?
-  endedAt        DateTime?
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-  resume         Resume          @relation(fields: [resumeId], references: [id])
-  user           User            @relation(fields: [userId], references: [id])
-  questions      Question[]
-  report         Report?
+  id              Int             @id @default(autoincrement())
+  userId          Int
+  title           String?
+  resumeSnapshot  Json?
+  resumeId        Int
+  difficulty      Difficulty      @default(MEDIUM)
+  status          InterviewStatus @default(PENDING)
+  startedAt       DateTime?
+  endedAt         DateTime?
+  tabSwitchCount  Int             @default(0)
+  fullscreenExits Int             @default(0)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  resume          Resume          @relation(fields: [resumeId], references: [id])
+  user            User            @relation(fields: [userId], references: [id])
+  questions       Question[]
+  report          Report?
 
   @@index([userId])
 }

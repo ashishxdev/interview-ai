@@ -151,6 +151,8 @@ exports.Prisma.InterviewScalarFieldEnum = {
   status: 'status',
   startedAt: 'startedAt',
   endedAt: 'endedAt',
+  tabSwitchCount: 'tabSwitchCount',
+  fullscreenExits: 'fullscreenExits',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

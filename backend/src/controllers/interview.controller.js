@@ -141,7 +141,7 @@ export const createInterview = async (req, res) => {
 export const submitAnswer = async (req, res) => {
     try {
         const { interviewId } = req.params;
-        const { questionId, answer, timeTaken, transcript } = req.body;
+        const { questionId, answer, timeTaken, transcript, tabSwitchCount, fullscreenExits } = req.body;
 
         if (!questionId || typeof answer !== "string" || !answer.trim()) {
             return res.status(400).json({
@@ -256,6 +256,21 @@ export const submitAnswer = async (req, res) => {
             },
         });
 
+        // Persist proctoring counts on the interview. They only ever grow on the
+        // client, so keep the highest value seen across submissions.
+        const incomingTabSwitches = Number.isFinite(tabSwitchCount) && tabSwitchCount >= 0 ? Math.trunc(tabSwitchCount) : 0;
+        const incomingFullscreenExits = Number.isFinite(fullscreenExits) && fullscreenExits >= 0 ? Math.trunc(fullscreenExits) : 0;
+
+        if (incomingTabSwitches > interview.tabSwitchCount || incomingFullscreenExits > interview.fullscreenExits) {
+            await prisma.interview.update({
+                where: { id: interviewIdNumber },
+                data: {
+                    tabSwitchCount: Math.max(interview.tabSwitchCount, incomingTabSwitches),
+                    fullscreenExits: Math.max(interview.fullscreenExits, incomingFullscreenExits),
+                },
+            });
+        }
+
         const totalQuestions = await prisma.question.count({
             where: {
                 interviewId: interviewIdNumber,
@@ -351,6 +366,10 @@ export const getInterviewReport = async (req, res) => {
             return res.status(200).json({
                 success: true,
                 report: interview.report,
+                integrity: {
+                    tabSwitchCount: interview.tabSwitchCount,
+                    fullscreenExits: interview.fullscreenExits,
+                },
             });
         }
 
@@ -408,6 +427,10 @@ export const getInterviewReport = async (req, res) => {
         return res.status(200).json({
             success: true,
             report,
+            integrity: {
+                tabSwitchCount: interview.tabSwitchCount,
+                fullscreenExits: interview.fullscreenExits,
+            },
         })
 
     } catch (err) {
