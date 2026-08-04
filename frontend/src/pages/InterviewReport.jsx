@@ -1,8 +1,9 @@
 import { Link, useParams } from "react-router-dom";
-import { AlertCircle, ArrowLeft, RefreshCw, ShieldAlert, ShieldCheck } from "lucide-react";
+import { AlertCircle, ArrowLeft, Download, RefreshCw, ShieldAlert, ShieldCheck } from "lucide-react";
 
 import AppLayout from "../components/AppLayout";
 import { useInterviewReport } from "../features/interview/interviewHooks";
+import { downloadReportPdf } from "../utils/reportPdf";
 
 const scoreItems = [
     ["overallScore", "Overall score"],
@@ -55,12 +56,24 @@ function InterviewReport() {
 
     return (
         <AppLayout>
-            <div className="mb-6">
-                <Link to="/interviews" className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-950">
-                    <ArrowLeft className="h-4 w-4" />
-                    History
-                </Link>
-                <h1 className="mt-3 text-2xl font-semibold text-slate-950">Interview report</h1>
+            <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+                <div>
+                    <Link to="/interviews" className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-950">
+                        <ArrowLeft className="h-4 w-4" />
+                        History
+                    </Link>
+                    <h1 className="mt-3 text-2xl font-semibold text-slate-950">Interview report</h1>
+                </div>
+                {report && (
+                    <button
+                        type="button"
+                        onClick={() => downloadReportPdf({ report, integrity })}
+                        className="inline-flex h-10 items-center gap-2 rounded-lg bg-slate-900 px-4 text-sm font-medium text-white shadow-sm hover:bg-slate-800"
+                    >
+                        <Download className="h-4 w-4" />
+                        Download PDF
+                    </button>
+                )}
             </div>
 
             {reportQuery.isLoading && (
