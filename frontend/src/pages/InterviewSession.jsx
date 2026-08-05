@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { AlertCircle, ArrowLeft, ArrowRight, CheckCircle2, Maximize2, Mic, MicOff, RefreshCw, Send, ShieldAlert, ShieldCheck, Volume2, VolumeX, X } from "lucide-react";
+import { AlertCircle, ArrowLeft, CheckCircle2, Maximize2, Mic, MicOff, RefreshCw, Send, ShieldAlert, ShieldCheck, Volume2, VolumeX, X } from "lucide-react";
 
 import AppLayout from "../components/AppLayout";
 import Spinner from "../components/Spinner";
@@ -47,8 +47,6 @@ function InterviewSession() {
 
     const { supported: ttsSupported, speaking, speak, cancel } = useTextToSpeech();
     const spokenQuestionRef = useRef(null);
-    // Track how long the candidate spends on the current question, and the
-    // speech-to-text transcript for it, so both can be persisted on submit.
     const questionStartRef = useRef(null);
     const spokenTranscriptRef = useRef("");
 
@@ -68,7 +66,6 @@ function InterviewSession() {
                 ? `${spokenTranscriptRef.current} ${chunk}`
                 : chunk;
         },
-        // Auto-stop the mic after 4s of silence, so users don't have to click "Stop".
         silenceTimeout: 4000,
     });
 
@@ -77,7 +74,7 @@ function InterviewSession() {
             stopListening();
             return;
         }
-        cancel(); // stop the AI reading before we start listening
+        cancel();
         startListening();
     };
 
@@ -93,8 +90,6 @@ function InterviewSession() {
         dismissViolation,
     } = useProctoring({ active: isAnswering });
 
-    // Auto-read each new question aloud once (not already-answered ones), and
-    // reset the per-question timer + transcript when the question changes.
     useEffect(() => {
         if (!currentQuestion || currentQuestion.answer) return;
         if (spokenQuestionRef.current === currentQuestion.id) return;
@@ -105,7 +100,6 @@ function InterviewSession() {
         speak(currentQuestion.question);
     }, [currentQuestion, speak]);
 
-    // While listening, show interim (not-yet-final) words appended live.
     const answerDisplayValue =
         listening && interimTranscript
             ? `${answer}${answer ? " " : ""}${interimTranscript}`
@@ -151,8 +145,6 @@ function InterviewSession() {
         submitAnswer();
     };
 
-    // When a question's time runs out: submit whatever the candidate has, or skip
-    // ahead if the answer is empty.
     const handleTimeExpire = () => {
         stopListening();
         if (submitMutation.isPending) return;
@@ -170,7 +162,6 @@ function InterviewSession() {
     return (
         <AppLayout>
             <div className="mx-auto max-w-6xl">
-                {/* Tab-switch / fullscreen-exit warning toast */}
                 {lastViolation && isAnswering && (
                     <div className="fixed inset-x-0 top-4 z-50 mx-auto flex max-w-md items-start gap-3 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 shadow-lg">
                         <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
@@ -220,7 +211,6 @@ function InterviewSession() {
                     </div>
                 </div>
 
-                {/* Prompt to enter fullscreen for a focused, proctored session */}
                 {isAnswering && !isFullscreen && (
                     <div className="mb-6 flex flex-col gap-3 rounded-lg border border-sky-200 bg-sky-50 p-4 sm:flex-row sm:items-center sm:justify-between">
                         <div className="flex items-start gap-3">
@@ -405,27 +395,9 @@ function InterviewSession() {
                         </div>
 
                         <div className="flex flex-col gap-3 border-t border-slate-200 p-5 sm:flex-row sm:items-center sm:justify-between">
-                            <div className="flex gap-2">
-                                <button
-                                    type="button"
-                                    onClick={() => goToIndex(Math.max(displayIndex - 1, 0))}
-                                    disabled={displayIndex === 0}
-                                    className="inline-flex h-10 items-center gap-2 rounded-lg border border-slate-300 px-3 text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
-                                >
-                                    <ArrowLeft className="h-4 w-4" />
-                                    Previous
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => goToIndex(Math.min(displayIndex + 1, questions.length - 1))}
-                                    disabled={displayIndex === questions.length - 1 || !currentQuestion.answer}
-                                    title={!currentQuestion.answer ? "Submit your answer to continue" : undefined}
-                                    className="inline-flex h-10 items-center gap-2 rounded-lg border border-slate-300 px-3 text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
-                                >
-                                    Next
-                                    <ArrowRight className="h-4 w-4" />
-                                </button>
-                            </div>
+                            <p className="text-xs text-slate-500">
+                                Answers are saved as you submit them and can't be changed later.
+                            </p>
 
                             {!currentQuestion.answer && (
                                 <button
@@ -434,7 +406,7 @@ function InterviewSession() {
                                     className="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-slate-950 px-4 text-sm font-semibold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
                                 >
                                     {submitMutation.isPending ? <Spinner /> : <Send className="h-4 w-4" />}
-                                    {submitMutation.isPending ? "Evaluating..." : "Submit answer"}
+                                    {submitMutation.isPending ? "Saving..." : "Submit answer"}
                                 </button>
                             )}
                         </div>

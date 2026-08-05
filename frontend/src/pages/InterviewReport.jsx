@@ -78,6 +78,15 @@ function InterviewReport() {
 
             {reportQuery.isLoading && (
                 <div className="space-y-4">
+                    <div className="flex items-center gap-3 rounded-lg border border-sky-200 bg-sky-50 p-4">
+                        <RefreshCw className="h-5 w-5 shrink-0 animate-spin text-sky-600" />
+                        <div>
+                            <p className="text-sm font-semibold text-sky-900">Evaluating your answers…</p>
+                            <p className="mt-0.5 text-xs text-sky-700">
+                                We're scoring every answer and building your report. This takes a few seconds.
+                            </p>
+                        </div>
+                    </div>
                     <div className="grid gap-4 md:grid-cols-2">
                         {[1, 2, 3, 4].map((item) => (
                             <div key={item} className="h-24 animate-pulse rounded-lg bg-white ring-1 ring-slate-200" />

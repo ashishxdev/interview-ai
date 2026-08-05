@@ -23,11 +23,18 @@ function Login() {
     }
 
     return (
-        <main className="grid min-h-screen place-items-center bg-slate-50 px-5 py-10">
-            <section className="w-full max-w-md rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+        <main className="grid min-h-screen place-items-center bg-gradient-to-br from-slate-50 via-sky-50/30 to-slate-50 px-5 py-10">
+            <section className="w-full max-w-md rounded-xl border border-slate-200/60 bg-white p-8 shadow-xl shadow-slate-900/5">
                 <div>
-                    <p className="text-sm font-medium text-slate-500">Interview AI</p>
-                    <h1 className="mt-2 text-2xl font-semibold text-slate-950">Login</h1>
+                    <div className="inline-flex items-center gap-2 rounded-lg bg-sky-100 px-3 py-1.5 text-sm font-medium text-sky-700">
+                        <span className="relative flex h-2 w-2">
+                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75" />
+                            <span className="relative inline-flex h-2 w-2 rounded-full bg-sky-500" />
+                        </span>
+                        Interview AI
+                    </div>
+                    <h1 className="mt-4 text-3xl font-bold text-slate-950">Welcome back</h1>
+                    <p className="mt-2 text-sm text-slate-600">Sign in to continue your interview practice</p>
                 </div>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">

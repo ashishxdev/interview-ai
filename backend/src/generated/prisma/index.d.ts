@@ -6478,12 +6478,12 @@ export namespace Prisma {
     id: number
     questionId: number
     answer: string
-    score: number
+    score: number | null
     timeTaken: number | null
     transcript: string | null
     confidence: number | null
-    feedback: string
-    idealAnswer: string
+    feedback: string | null
+    idealAnswer: string | null
     missingPoints: JsonValue | null
     answeredAt: Date | null
     createdAt: Date
@@ -6596,12 +6596,12 @@ export namespace Prisma {
       id: number
       questionId: number
       answer: string
-      score: number
+      score: number | null
       timeTaken: number | null
       transcript: string | null
       confidence: number | null
-      feedback: string
-      idealAnswer: string
+      feedback: string | null
+      idealAnswer: string | null
       missingPoints: Prisma.JsonValue | null
       answeredAt: Date | null
       createdAt: Date
@@ -9308,12 +9308,12 @@ export namespace Prisma {
     id?: IntFilter<"Answer"> | number
     questionId?: IntFilter<"Answer"> | number
     answer?: StringFilter<"Answer"> | string
-    score?: IntFilter<"Answer"> | number
+    score?: IntNullableFilter<"Answer"> | number | null
     timeTaken?: IntNullableFilter<"Answer"> | number | null
     transcript?: StringNullableFilter<"Answer"> | string | null
     confidence?: FloatNullableFilter<"Answer"> | number | null
-    feedback?: StringFilter<"Answer"> | string
-    idealAnswer?: StringFilter<"Answer"> | string
+    feedback?: StringNullableFilter<"Answer"> | string | null
+    idealAnswer?: StringNullableFilter<"Answer"> | string | null
     missingPoints?: JsonNullableFilter<"Answer">
     answeredAt?: DateTimeNullableFilter<"Answer"> | Date | string | null
     createdAt?: DateTimeFilter<"Answer"> | Date | string
@@ -9325,12 +9325,12 @@ export namespace Prisma {
     id?: SortOrder
     questionId?: SortOrder
     answer?: SortOrder
-    score?: SortOrder
+    score?: SortOrderInput | SortOrder
     timeTaken?: SortOrderInput | SortOrder
     transcript?: SortOrderInput | SortOrder
     confidence?: SortOrderInput | SortOrder
-    feedback?: SortOrder
-    idealAnswer?: SortOrder
+    feedback?: SortOrderInput | SortOrder
+    idealAnswer?: SortOrderInput | SortOrder
     missingPoints?: SortOrderInput | SortOrder
     answeredAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -9345,12 +9345,12 @@ export namespace Prisma {
     OR?: AnswerWhereInput[]
     NOT?: AnswerWhereInput | AnswerWhereInput[]
     answer?: StringFilter<"Answer"> | string
-    score?: IntFilter<"Answer"> | number
+    score?: IntNullableFilter<"Answer"> | number | null
     timeTaken?: IntNullableFilter<"Answer"> | number | null
     transcript?: StringNullableFilter<"Answer"> | string | null
     confidence?: FloatNullableFilter<"Answer"> | number | null
-    feedback?: StringFilter<"Answer"> | string
-    idealAnswer?: StringFilter<"Answer"> | string
+    feedback?: StringNullableFilter<"Answer"> | string | null
+    idealAnswer?: StringNullableFilter<"Answer"> | string | null
     missingPoints?: JsonNullableFilter<"Answer">
     answeredAt?: DateTimeNullableFilter<"Answer"> | Date | string | null
     createdAt?: DateTimeFilter<"Answer"> | Date | string
@@ -9362,12 +9362,12 @@ export namespace Prisma {
     id?: SortOrder
     questionId?: SortOrder
     answer?: SortOrder
-    score?: SortOrder
+    score?: SortOrderInput | SortOrder
     timeTaken?: SortOrderInput | SortOrder
     transcript?: SortOrderInput | SortOrder
     confidence?: SortOrderInput | SortOrder
-    feedback?: SortOrder
-    idealAnswer?: SortOrder
+    feedback?: SortOrderInput | SortOrder
+    idealAnswer?: SortOrderInput | SortOrder
     missingPoints?: SortOrderInput | SortOrder
     answeredAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -9386,12 +9386,12 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Answer"> | number
     questionId?: IntWithAggregatesFilter<"Answer"> | number
     answer?: StringWithAggregatesFilter<"Answer"> | string
-    score?: IntWithAggregatesFilter<"Answer"> | number
+    score?: IntNullableWithAggregatesFilter<"Answer"> | number | null
     timeTaken?: IntNullableWithAggregatesFilter<"Answer"> | number | null
     transcript?: StringNullableWithAggregatesFilter<"Answer"> | string | null
     confidence?: FloatNullableWithAggregatesFilter<"Answer"> | number | null
-    feedback?: StringWithAggregatesFilter<"Answer"> | string
-    idealAnswer?: StringWithAggregatesFilter<"Answer"> | string
+    feedback?: StringNullableWithAggregatesFilter<"Answer"> | string | null
+    idealAnswer?: StringNullableWithAggregatesFilter<"Answer"> | string | null
     missingPoints?: JsonNullableWithAggregatesFilter<"Answer">
     answeredAt?: DateTimeNullableWithAggregatesFilter<"Answer"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Answer"> | Date | string
@@ -9851,12 +9851,12 @@ export namespace Prisma {
 
   export type AnswerCreateInput = {
     answer: string
-    score: number
+    score?: number | null
     timeTaken?: number | null
     transcript?: string | null
     confidence?: number | null
-    feedback: string
-    idealAnswer: string
+    feedback?: string | null
+    idealAnswer?: string | null
     missingPoints?: NullableJsonNullValueInput | InputJsonValue
     answeredAt?: Date | string | null
     createdAt?: Date | string
@@ -9868,12 +9868,12 @@ export namespace Prisma {
     id?: number
     questionId: number
     answer: string
-    score: number
+    score?: number | null
     timeTaken?: number | null
     transcript?: string | null
     confidence?: number | null
-    feedback: string
-    idealAnswer: string
+    feedback?: string | null
+    idealAnswer?: string | null
     missingPoints?: NullableJsonNullValueInput | InputJsonValue
     answeredAt?: Date | string | null
     createdAt?: Date | string
@@ -9882,12 +9882,12 @@ export namespace Prisma {
 
   export type AnswerUpdateInput = {
     answer?: StringFieldUpdateOperationsInput | string
-    score?: IntFieldUpdateOperationsInput | number
+    score?: NullableIntFieldUpdateOperationsInput | number | null
     timeTaken?: NullableIntFieldUpdateOperationsInput | number | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     confidence?: NullableFloatFieldUpdateOperationsInput | number | null
-    feedback?: StringFieldUpdateOperationsInput | string
-    idealAnswer?: StringFieldUpdateOperationsInput | string
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    idealAnswer?: NullableStringFieldUpdateOperationsInput | string | null
     missingPoints?: NullableJsonNullValueInput | InputJsonValue
     answeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9899,12 +9899,12 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     questionId?: IntFieldUpdateOperationsInput | number
     answer?: StringFieldUpdateOperationsInput | string
-    score?: IntFieldUpdateOperationsInput | number
+    score?: NullableIntFieldUpdateOperationsInput | number | null
     timeTaken?: NullableIntFieldUpdateOperationsInput | number | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     confidence?: NullableFloatFieldUpdateOperationsInput | number | null
-    feedback?: StringFieldUpdateOperationsInput | string
-    idealAnswer?: StringFieldUpdateOperationsInput | string
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    idealAnswer?: NullableStringFieldUpdateOperationsInput | string | null
     missingPoints?: NullableJsonNullValueInput | InputJsonValue
     answeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9915,12 +9915,12 @@ export namespace Prisma {
     id?: number
     questionId: number
     answer: string
-    score: number
+    score?: number | null
     timeTaken?: number | null
     transcript?: string | null
     confidence?: number | null
-    feedback: string
-    idealAnswer: string
+    feedback?: string | null
+    idealAnswer?: string | null
     missingPoints?: NullableJsonNullValueInput | InputJsonValue
     answeredAt?: Date | string | null
     createdAt?: Date | string
@@ -9929,12 +9929,12 @@ export namespace Prisma {
 
   export type AnswerUpdateManyMutationInput = {
     answer?: StringFieldUpdateOperationsInput | string
-    score?: IntFieldUpdateOperationsInput | number
+    score?: NullableIntFieldUpdateOperationsInput | number | null
     timeTaken?: NullableIntFieldUpdateOperationsInput | number | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     confidence?: NullableFloatFieldUpdateOperationsInput | number | null
-    feedback?: StringFieldUpdateOperationsInput | string
-    idealAnswer?: StringFieldUpdateOperationsInput | string
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    idealAnswer?: NullableStringFieldUpdateOperationsInput | string | null
     missingPoints?: NullableJsonNullValueInput | InputJsonValue
     answeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9945,12 +9945,12 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     questionId?: IntFieldUpdateOperationsInput | number
     answer?: StringFieldUpdateOperationsInput | string
-    score?: IntFieldUpdateOperationsInput | number
+    score?: NullableIntFieldUpdateOperationsInput | number | null
     timeTaken?: NullableIntFieldUpdateOperationsInput | number | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     confidence?: NullableFloatFieldUpdateOperationsInput | number | null
-    feedback?: StringFieldUpdateOperationsInput | string
-    idealAnswer?: StringFieldUpdateOperationsInput | string
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    idealAnswer?: NullableStringFieldUpdateOperationsInput | string | null
     missingPoints?: NullableJsonNullValueInput | InputJsonValue
     answeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12032,12 +12032,12 @@ export namespace Prisma {
 
   export type AnswerCreateWithoutQuestionInput = {
     answer: string
-    score: number
+    score?: number | null
     timeTaken?: number | null
     transcript?: string | null
     confidence?: number | null
-    feedback: string
-    idealAnswer: string
+    feedback?: string | null
+    idealAnswer?: string | null
     missingPoints?: NullableJsonNullValueInput | InputJsonValue
     answeredAt?: Date | string | null
     createdAt?: Date | string
@@ -12047,12 +12047,12 @@ export namespace Prisma {
   export type AnswerUncheckedCreateWithoutQuestionInput = {
     id?: number
     answer: string
-    score: number
+    score?: number | null
     timeTaken?: number | null
     transcript?: string | null
     confidence?: number | null
-    feedback: string
-    idealAnswer: string
+    feedback?: string | null
+    idealAnswer?: string | null
     missingPoints?: NullableJsonNullValueInput | InputJsonValue
     answeredAt?: Date | string | null
     createdAt?: Date | string
@@ -12115,12 +12115,12 @@ export namespace Prisma {
 
   export type AnswerUpdateWithoutQuestionInput = {
     answer?: StringFieldUpdateOperationsInput | string
-    score?: IntFieldUpdateOperationsInput | number
+    score?: NullableIntFieldUpdateOperationsInput | number | null
     timeTaken?: NullableIntFieldUpdateOperationsInput | number | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     confidence?: NullableFloatFieldUpdateOperationsInput | number | null
-    feedback?: StringFieldUpdateOperationsInput | string
-    idealAnswer?: StringFieldUpdateOperationsInput | string
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    idealAnswer?: NullableStringFieldUpdateOperationsInput | string | null
     missingPoints?: NullableJsonNullValueInput | InputJsonValue
     answeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12130,12 +12130,12 @@ export namespace Prisma {
   export type AnswerUncheckedUpdateWithoutQuestionInput = {
     id?: IntFieldUpdateOperationsInput | number
     answer?: StringFieldUpdateOperationsInput | string
-    score?: IntFieldUpdateOperationsInput | number
+    score?: NullableIntFieldUpdateOperationsInput | number | null
     timeTaken?: NullableIntFieldUpdateOperationsInput | number | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     confidence?: NullableFloatFieldUpdateOperationsInput | number | null
-    feedback?: StringFieldUpdateOperationsInput | string
-    idealAnswer?: StringFieldUpdateOperationsInput | string
+    feedback?: NullableStringFieldUpdateOperationsInput | string | null
+    idealAnswer?: NullableStringFieldUpdateOperationsInput | string | null
     missingPoints?: NullableJsonNullValueInput | InputJsonValue
     answeredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

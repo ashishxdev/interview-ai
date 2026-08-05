@@ -139,12 +139,17 @@ export const evaluateAnswerWithGemini = async (question, answer) => {
     const prompt = `
     You are an expert technical interviewer.
 
-    Evaluate the candidate's answer.
+    The candidate's answer below was captured by voice/speech-to-text, so it may
+    contain transcription errors, misheard words, filler words ("um", "like"),
+    missing punctuation, and grammar mistakes. Before judging, mentally reconstruct
+    what the candidate most likely meant. Evaluate them on the CORRECTNESS and
+    completeness of the underlying technical content and their intended meaning —
+    never penalize them for transcription, spelling, punctuation, or grammar noise.
 
     Question:
     ${question}
 
-    Candidate Answer:
+    Candidate Answer (raw voice transcript):
     ${answer}
 
     Return ONLY valid JSON.

@@ -73,12 +73,12 @@ model Answer {
   id            Int       @id @default(autoincrement())
   questionId    Int       @unique
   answer        String
-  score         Int
+  score         Int?
   timeTaken     Int?
   transcript    String?
   confidence    Float?
-  feedback      String
-  idealAnswer   String
+  feedback      String?
+  idealAnswer   String?
   missingPoints Json?
   answeredAt    DateTime?
   createdAt     DateTime  @default(now())

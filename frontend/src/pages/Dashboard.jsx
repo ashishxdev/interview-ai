@@ -37,7 +37,7 @@ const formatStatus = (status) => {
 
 function StatCard({ icon: Icon, label, value, tone }) {
     return (
-        <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
             <div className="flex items-center justify-between gap-4">
                 <div>
                     <p className="text-sm font-medium text-slate-500">{label}</p>

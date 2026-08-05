@@ -213,37 +213,11 @@ export const submitAnswer = async (req, res) => {
                 message: "Question already answered.",
             });
         }
-
-        const evaluationText = await evaluateAnswerWithGemini(
-            question.question,
-            answer
-        );
-        let evaluation;
-
-        try {
-            evaluation = JSON.parse(evaluationText);
-            if (
-                typeof evaluation.score !== "number" ||
-                !evaluation.feedback ||
-                !evaluation.idealAnswer
-            ) {
-                throw new Error("Invalid evaluation response.");
-            }
-        } catch {
-            return res.status(500).json({
-                success: false,
-                message: "Failed to parse Gemini response.",
-            });
-        }
-
+        
         const savedAnswer = await prisma.answer.create({
             data: {
                 questionId: question.id,
                 answer,
-                score: evaluation.score,
-                feedback: evaluation.feedback,
-                idealAnswer: evaluation.idealAnswer,
-                missingPoints: evaluation.missingPoints,
                 answeredAt: new Date(),
                 timeTaken:
                     Number.isFinite(timeTaken) && timeTaken >= 0
@@ -256,8 +230,6 @@ export const submitAnswer = async (req, res) => {
             },
         });
 
-        // Persist proctoring counts on the interview. They only ever grow on the
-        // client, so keep the highest value seen across submissions.
         const incomingTabSwitches = Number.isFinite(tabSwitchCount) && tabSwitchCount >= 0 ? Math.trunc(tabSwitchCount) : 0;
         const incomingFullscreenExits = Number.isFinite(fullscreenExits) && fullscreenExits >= 0 ? Math.trunc(fullscreenExits) : 0;
 
@@ -373,7 +345,7 @@ export const getInterviewReport = async (req, res) => {
             });
         }
 
-        const questions = await prisma.question.findMany({
+        let questions = await prisma.question.findMany({
             where: {
                 interviewId: interviewIdNumber,
             },
@@ -389,6 +361,58 @@ export const getInterviewReport = async (req, res) => {
             return res.status(400).json({
                 success: false,
                 message: "Some interview answers are missing.",
+            });
+        }
+
+        const unevaluated = questions.filter((q) => q.answer && q.answer.score == null);
+
+        if (unevaluated.length > 0) {
+            const evaluations = await Promise.all(
+                unevaluated.map(async (q) => {
+                    const evaluationText = await evaluateAnswerWithGemini(
+                        q.question,
+                        q.answer.answer
+                    );
+                    let evaluation;
+                    try {
+                        evaluation = JSON.parse(evaluationText);
+                        if (
+                            typeof evaluation.score !== "number" ||
+                            !evaluation.feedback ||
+                            !evaluation.idealAnswer
+                        ) {
+                            throw new Error("Invalid evaluation response.");
+                        }
+                    } catch {
+                        evaluation = {
+                            score: 0,
+                            feedback: "This answer could not be evaluated automatically.",
+                            idealAnswer: "",
+                            missingPoints: [],
+                        };
+                    }
+                    return { answerId: q.answer.id, evaluation };
+                })
+            );
+
+            await prisma.$transaction(
+                evaluations.map(({ answerId, evaluation }) =>
+                    prisma.answer.update({
+                        where: { id: answerId },
+                        data: {
+                            score: evaluation.score,
+                            feedback: evaluation.feedback,
+                            idealAnswer: evaluation.idealAnswer,
+                            missingPoints: evaluation.missingPoints,
+                        },
+                    })
+                )
+            );
+
+            questions = await prisma.question.findMany({
+                where: { interviewId: interviewIdNumber },
+                include: { answer: true },
+                orderBy: { questionNumber: "asc" },
             });
         }
 
@@ -512,33 +536,6 @@ export const deleteInterview = async (req, res) => {
             });
         }
 
-        // thru transaction
-        // await prisma.$transaction(async (tx) => {
-        //     await tx.answer.deleteMany({
-        //         where: {
-        //             question: {
-        //                 interviewId,
-        //             },
-        //         },
-        //     });
-        //     await tx.question.deleteMany({
-        //         where: {
-        //             interviewId,
-        //         },
-        //     });
-        //     await tx.report.deleteMany({
-        //         where: {
-        //             interviewId,
-        //         },
-        //     });
-        //     await tx.interview.delete({
-        //         where: {
-        //             id: interviewId,
-        //         },
-        //     });
-        // });
-
-        // thru cascade delete after fixing db
         await prisma.interview.delete({
             where: {
                 id: interviewId,
