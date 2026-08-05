@@ -21,7 +21,7 @@ const isGeminiUnavailableError = (error) => {
     );
 };
 
-const generateContentWithRetry = async (prompt, model, retries = 2) => {
+export const generateContentWithRetry = async (prompt, model, retries = 2) => {
     let lastError;
 
     for (let attempt = 0; attempt <= retries; attempt += 1) {

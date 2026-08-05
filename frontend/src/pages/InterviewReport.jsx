@@ -102,7 +102,10 @@ function InterviewReport() {
                         <AlertCircle className="mt-0.5 h-5 w-5" />
                         <div>
                             <p className="font-semibold">Report is not ready yet.</p>
-                            <p className="mt-1 text-sm">Complete all answers, then retry report generation.</p>
+                            <p className="mt-1 text-sm">
+                                {reportQuery.error?.response?.data?.message ||
+                                    "Complete all answers, then retry report generation."}
+                            </p>
                             <button
                                 type="button"
                                 onClick={() => reportQuery.refetch()}

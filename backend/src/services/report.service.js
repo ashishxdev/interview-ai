@@ -1,7 +1,4 @@
-import { GoogleGenAI } from "@google/genai"
-const ai = new GoogleGenAI({
-    apiKey: process.env.GEMINI_API_KEY,
-})
+import { generateContentWithRetry } from "./gemini.service.js"
 
 export const generateInterviewReport = async (interviewData) => {
 
@@ -34,11 +31,11 @@ export const generateInterviewReport = async (interviewData) => {
     - Return ONLY JSON. No markdown. No explanations.
     `;
 
-    const response = await ai.models.generateContent({
-        model: "gemini-3.6-flash",
-        contents: prompt,
-    });
-    const text = response.candidates[0].content.parts[0].text;
+    const response = await generateContentWithRetry(prompt, "gemini-3.6-flash");
+    const text =
+        response?.text ??
+        response?.candidates?.[0]?.content?.parts?.[0]?.text ??
+        "";
     const cleanText = text
         .replace(/```json/g, "")
         .replace(/```/g, "")
