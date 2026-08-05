@@ -49,7 +49,7 @@ model Interview {
   fullscreenExits  Int           @default(0)
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
-  resume         Resume          @relation(fields: [resumeId], references: [id])
+  resume         Resume          @relation(fields: [resumeId], references: [id], onDelete: Cascade)
   user           User            @relation(fields: [userId], references: [id])
   questions      Question[]
   report         Report?
